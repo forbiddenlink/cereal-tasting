@@ -112,11 +112,23 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                         </div>
                         <motion.button
                             onClick={handleAddToCart}
-                            className="relative bg-gradient-to-br from-gold via-gold to-gold-dim text-void px-4 py-2.5 rounded-lg font-heading font-bold text-xs uppercase tracking-wide overflow-hidden shadow-[0_4px_14px_rgba(212,175,55,0.4)] border border-gold/20"
-                            whileHover={{ scale: 1.05, boxShadow: '0 8px 30px rgba(212,175,55,0.6)', borderColor: 'rgba(212,175,55,0.5)' }}
-                            whileTap={{ scale: 0.95 }}
+                            className="relative bg-gradient-to-br from-gold via-gold-dim to-[#8B7000] text-void px-5 py-3 rounded-lg font-heading font-bold text-sm uppercase tracking-wider overflow-hidden shadow-[0_8px_24px_rgba(212,175,55,0.5)] border-2 border-gold-dim/40 hover:border-gold transition-all duration-300"
+                            whileHover={{ 
+                                scale: 1.08, 
+                                y: -2,
+                                boxShadow: '0 12px 40px rgba(212,175,55,0.7)',
+                                borderColor: 'rgba(212,175,55,0.8)'
+                            }}
+                            whileTap={{ scale: 0.96, y: 0 }}
                             transition={springs.snappy}
                         >
+                            {/* Shine effect */}
+                            <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                                initial={{ x: '-100%' }}
+                                whileHover={{ x: '100%' }}
+                                transition={{ duration: 0.6 }}
+                            />
                             <AnimatePresence mode="wait">
                                 {addedToCart ? (
                                     <motion.span
@@ -125,12 +137,12 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                                         animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
                                         exit={{ y: -12, opacity: 0, filter: 'blur(4px)' }}
                                         transition={springs.snappy}
-                                        className="flex items-center gap-1"
+                                        className="flex items-center justify-center gap-2 relative z-10"
                                     >
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                         </svg>
-                                        Added!
+                                        <span className="font-extrabold">Added!</span>
                                     </motion.span>
                                 ) : (
                                     <motion.span
@@ -139,8 +151,16 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                                         animate={{ y: 0, opacity: 1 }}
                                         exit={{ y: -12, opacity: 0 }}
                                         transition={springs.snappy}
+                                        className="flex items-center justify-center gap-2 relative z-10"
                                     >
-                                        Add to Cart
+                                        <span className="font-extrabold">Add to Cart</span>
+                                        <motion.span
+                                            initial={{ x: 0 }}
+                                            whileHover={{ x: 3 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            →
+                                        </motion.span>
                                     </motion.span>
                                 )}
                             </AnimatePresence>
