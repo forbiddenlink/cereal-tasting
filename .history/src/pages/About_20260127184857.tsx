@@ -25,7 +25,7 @@ export const About: React.FC = () => {
                 </motion.div>
 
                 {/* Story Sections */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
                     {/* Section 1 - Heritage */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -102,7 +102,7 @@ export const About: React.FC = () => {
                             Each box is carefully aged in our climate-controlled cellar (actually just a basement) 
                             where temperature and humidity are monitored to prevent staleness while maximizing nostalgia.
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {[
                                 { title: 'Vintage Selection', desc: 'Only cereals from years when cartoon quality peaked' },
                                 { title: 'Crunch Analysis', desc: 'Measured in dB using professional sound equipment' },
@@ -146,7 +146,7 @@ export const About: React.FC = () => {
                             </p>
                         </div>
                         
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                             {[
                                 { name: 'React 19', abbr: 'R' },
                                 { name: 'TypeScript', abbr: 'TS' },

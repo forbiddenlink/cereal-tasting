@@ -25,14 +25,14 @@ export const About: React.FC = () => {
                 </motion.div>
 
                 {/* Story Sections */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
                     {/* Section 1 - Heritage */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="glass-panel-heavy p-12 rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
+                        className="glass-panel-heavy p-10 rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-3xl group-hover:bg-gold/10 transition-all duration-500"></div>
                         <div className="relative z-10">
@@ -102,7 +102,7 @@ export const About: React.FC = () => {
                             Each box is carefully aged in our climate-controlled cellar (actually just a basement) 
                             where temperature and humidity are monitored to prevent staleness while maximizing nostalgia.
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {[
                                 { title: 'Vintage Selection', desc: 'Only cereals from years when cartoon quality peaked' },
                                 { title: 'Crunch Analysis', desc: 'Measured in dB using professional sound equipment' },
@@ -146,7 +146,7 @@ export const About: React.FC = () => {
                             </p>
                         </div>
                         
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                             {[
                                 { name: 'React 19', abbr: 'R' },
                                 { name: 'TypeScript', abbr: 'TS' },

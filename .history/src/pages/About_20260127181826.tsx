@@ -3,7 +3,7 @@ import React from 'react';
 
 export const About: React.FC = () => {
     return (
-        <div className="min-h-screen pt-40 pb-20 px-4">
+        <div className="min-h-screen pt-32 pb-20 px-4">
             <div className="container mx-auto max-w-6xl">
                 {/* Hero Header */}
                 <motion.div
@@ -25,14 +25,14 @@ export const About: React.FC = () => {
                 </motion.div>
 
                 {/* Story Sections */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
                     {/* Section 1 - Heritage */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="glass-panel-heavy p-12 rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
+                        className="glass-panel-heavy p-10 rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-3xl group-hover:bg-gold/10 transition-all duration-500"></div>
                         <div className="relative z-10">
@@ -59,7 +59,7 @@ export const About: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="glass-panel-heavy p-12 rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
+                        className="glass-panel-heavy p-10 rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-3xl group-hover:bg-gold/10 transition-all duration-500"></div>
                         <div className="relative z-10">
@@ -88,7 +88,7 @@ export const About: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="glass-panel-heavy p-12 md:p-16 rounded-2xl border-2 border-gold/20 relative overflow-hidden mb-16 hover:border-gold/40 transition-all duration-500"
+                    className="glass-panel-heavy p-10 md:p-12 rounded-2xl border-2 border-gold/20 relative overflow-hidden mb-16 hover:border-gold/40 transition-all duration-500"
                 >
                     <div className="absolute top-0 left-1/2 w-64 h-64 bg-gold/5 rounded-full blur-3xl -translate-x-1/2"></div>
                     <div className="relative z-10">
@@ -102,7 +102,7 @@ export const About: React.FC = () => {
                             Each box is carefully aged in our climate-controlled cellar (actually just a basement) 
                             where temperature and humidity are monitored to prevent staleness while maximizing nostalgia.
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {[
                                 { title: 'Vintage Selection', desc: 'Only cereals from years when cartoon quality peaked' },
                                 { title: 'Crunch Analysis', desc: 'Measured in dB using professional sound equipment' },
@@ -115,7 +115,7 @@ export const About: React.FC = () => {
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="flex items-start gap-4 p-6 rounded-lg bg-merlot/30 border border-gold/10 hover:border-gold/30 transition-all duration-300"
+                                    className="flex items-start gap-4 p-4 rounded-lg bg-merlot/30 border border-gold/10 hover:border-gold/30 transition-all duration-300"
                                 >
                                     <div className="w-2 h-2 rounded-full bg-gold mt-2 flex-shrink-0"></div>
                                     <div>
@@ -134,7 +134,7 @@ export const About: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="border-2 border-gold/30 p-12 md:p-16 rounded-2xl bg-gradient-to-br from-merlot/50 to-merlot-dark/50 relative overflow-hidden mb-16"
+                    className="border-2 border-gold/30 p-10 md:p-12 rounded-2xl bg-gradient-to-br from-merlot/50 to-merlot-dark/50 relative overflow-hidden mb-16"
                 >
                     <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-gold/5 rounded-full blur-3xl"></div>
                     <div className="relative z-10">
@@ -146,7 +146,7 @@ export const About: React.FC = () => {
                             </p>
                         </div>
                         
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                             {[
                                 { name: 'React 19', abbr: 'R' },
                                 { name: 'TypeScript', abbr: 'TS' },
@@ -162,7 +162,7 @@ export const About: React.FC = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
                                     whileHover={{ y: -4, scale: 1.05 }}
-                                    className="bg-gradient-to-br from-merlot-dark/80 to-merlot/40 backdrop-blur-sm border-2 border-gold/20 rounded-xl p-8 text-center hover:border-gold/40 transition-all duration-300 group"
+                                    className="bg-gradient-to-br from-merlot-dark/80 to-merlot/40 backdrop-blur-sm border-2 border-gold/20 rounded-xl p-6 text-center hover:border-gold/40 transition-all duration-300 group"
                                 >
                                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dim flex items-center justify-center mx-auto mb-3 text-void font-heading font-bold text-lg group-hover:scale-110 transition-transform duration-300">
                                         {tech.abbr}
@@ -188,6 +188,25 @@ export const About: React.FC = () => {
                         Please don't actually pay $1,500 for Lucky Charms. All trademark cereals mentioned are property 
                         of their respective copyright holders and are used here purely for comedic and educational purposes.
                     </p>
+                    <div className="flex items-center justify-center gap-2">
+                        <div className="w-8 h-1 bg-gradient-to-r from-transparent via-slime to-transparent"></div>
+                        <p className="text-slime/70 text-sm font-mono">
+                            Made with care and excessive amounts of sugar
+                        </p>
+                        <div className="w-8 h-1 bg-gradient-to-r from-transparent via-slime to-transparent"></div>
+                    </div>
+                    initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="text-center space-y-4 pt-8"
+                    >
+                        <p className="text-cream/40 text-xs font-mono max-w-2xl mx-auto leading-relaxed">
+                            <strong className="text-gold/60">Legal Disclaimer:</strong> The Cereal Cellar is a satirical portfolio project. 
+                            No actual cereal sommeliers were consulted (or exist). All prices are fictional and absurd. 
+                            Please don't actually pay $1,500 for Lucky Charms. All trademark cereals mentioned are property 
+                            of their respective copyright holders and are used here purely for comedic and educational purposes.
+                        </p>
                     <div className="flex items-center justify-center gap-2">
                         <div className="w-8 h-1 bg-gradient-to-r from-transparent via-slime to-transparent"></div>
                         <p className="text-slime/70 text-sm font-mono">

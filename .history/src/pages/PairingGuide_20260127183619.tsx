@@ -42,14 +42,14 @@ export const PairingGuide: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="lg:col-span-3"
                     >
-                        <div className="glass-panel-heavy p-12 rounded-2xl border-2 border-gold/20 sticky top-24">
+                        <div className="glass-panel-heavy p-6 rounded-2xl border-2 border-gold/20 sticky top-24">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-gold-dim flex items-center justify-center">
                                     <span className="text-lg text-void font-heading font-bold">1</span>
                                 </div>
                                 <h3 className="text-xl font-heading text-gold">Select Vintage</h3>
                             </div>
-                            <div className="space-y-2 max-h-[60vh] overflow-y-auto px-4 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
+                            <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
                                 {CEREALS.map((cereal) => (
                                     <motion.button
                                         key={cereal.id}
@@ -60,7 +60,7 @@ export const PairingGuide: React.FC = () => {
                                         whileHover={{ x: 4 }}
                                         whileTap={{ scale: 0.98 }}
                                         className={`
-                                            w-full group p-8 text-left rounded-lg border-2 transition-all duration-300 relative overflow-hidden
+                                            w-full group p-4 text-left rounded-lg border-2 transition-all duration-300 relative overflow-hidden
                                             ${selectedCereal.id === cereal.id
                                                 ? 'bg-gradient-to-br from-gold/20 to-gold-dim/10 border-gold shadow-[0_0_20px_rgba(212,175,55,0.3)]'
                                                 : 'bg-merlot-dark/30 border-gold/10 hover:border-gold/30 hover:bg-merlot/40'}
@@ -100,7 +100,7 @@ export const PairingGuide: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="lg:col-span-4"
                     >
-                        <div className="glass-panel-heavy p-12 rounded-2xl border-2 border-gold/20 sticky top-24">
+                        <div className="glass-panel-heavy p-6 rounded-2xl border-2 border-gold/20 sticky top-24">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-gold-dim flex items-center justify-center">
                                     <span className="text-lg text-void font-heading font-bold">2</span>

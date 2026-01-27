@@ -9,7 +9,7 @@ interface MilkSelectorProps {
 
 export const MilkSelector: React.FC<MilkSelectorProps> = ({ milks, selectedMilkId, onSelect }) => {
     return (
-        <div className="space-y-4 max-h-[60vh] overflow-y-auto px-4 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
+        <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
                 {milks.map((milk) => (
                     <button
                         key={milk.id}

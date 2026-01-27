@@ -9,13 +9,13 @@ interface MilkSelectorProps {
 
 export const MilkSelector: React.FC<MilkSelectorProps> = ({ milks, selectedMilkId, onSelect }) => {
     return (
-        <div className="space-y-4 max-h-[60vh] overflow-y-auto px-4 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
+        <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
                 {milks.map((milk) => (
                     <button
                         key={milk.id}
                         onClick={() => onSelect(milk)}
                         className={`
-                            w-full group relative p-8 rounded-lg text-left transition-all duration-500 overflow-hidden
+                            group relative p-6 rounded-lg text-left transition-all duration-500 overflow-hidden
                             ${selectedMilkId === milk.id
                                 ? 'bg-gradient-to-r from-merlot to-merlot-dark border border-gold shadow-[0_0_20px_rgba(212,175,55,0.2)]'
                                 : 'bg-white/5 border border-white/5 hover:border-gold/30 hover:bg-white/10'}

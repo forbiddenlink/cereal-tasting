@@ -49,7 +49,7 @@ export const PairingGuide: React.FC = () => {
                                 </div>
                                 <h3 className="text-xl font-heading text-gold">Select Vintage</h3>
                             </div>
-                            <div className="space-y-2 max-h-[60vh] overflow-y-auto px-4 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
+                            <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
                                 {CEREALS.map((cereal) => (
                                     <motion.button
                                         key={cereal.id}
