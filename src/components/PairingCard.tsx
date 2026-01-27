@@ -47,8 +47,7 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
     }
 
     return (
-        <div className="glass-panel-heavy p-12 rounded-2xl relative overflow-hidden min-h-[500px] flex flex-col justify-center">
-
+        <div className="glass-panel-heavy p-6 md:p-12 rounded-2xl relative overflow-hidden min-h-[400px] md:min-h-[500px] flex flex-col justify-center">
             <div className="relative z-10 text-center">
                 <motion.div
                     key={cereal.id}
@@ -56,22 +55,28 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-4xl md:text-5xl font-heading text-gold mb-2 drop-shadow-md">{cereal.name}</h2>
-                    <div className="flex justify-center items-center gap-3 text-sm font-mono text-gold/60 mb-12 uppercase tracking-[0.2em]">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading text-gold mb-2 drop-shadow-md">{cereal.name}</h2>
+                    <div className="flex justify-center items-center gap-2 md:gap-3 text-xs md:text-sm font-mono text-gold/60 mb-8 md:mb-12 uppercase tracking-[0.2em]">
                         <span>Vintage {cereal.vintage}</span>
                         <span className="w-1 h-1 bg-gold rounded-full" />
                         <span>{cereal.region}</span>
                     </div>
                 </motion.div>
 
-                <div className="flex justify-center items-center gap-8 mb-12">
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-8 md:mb-12">
                     {/* Dynamic Cereal Visual */}
                     <motion.div
                         initial={{ x: -50, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
-                        className="w-40 h-52 bg-gradient-to-tr from-zinc-800 to-zinc-700 border border-white/10 rounded-lg flex items-center justify-center shadow-2xl relative overflow-hidden group"
-                    >
-                        <img src={`src/assets/${cereal.image}`} alt={cereal.name} className="w-full h-full object-contain p-4 z-10" />
+                        className="w-32 h-44 sm:w-40 sm:h-52 bg-gradient-to-tr from-zinc-800 to-zinc-700 border border-white/10 rounded-lg flex items-center justify-center shadow-2xl relative overflow-hidden group">
+                        <img 
+                            src={`/src/assets/${cereal.image}`} 
+                            alt={cereal.name} 
+                            className="w-full h-full object-contain p-4 z-10 max-w-[120px] max-h-[160px]"
+                            onError={(e) => {
+                                e.currentTarget.src = 'https://via.placeholder.com/120x160/3f3f46/d4af37?text=' + encodeURIComponent(cereal.name);
+                            }}
+                        />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-0" />
                     </motion.div>
 

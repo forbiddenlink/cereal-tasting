@@ -21,11 +21,11 @@ export const PairingGuide: React.FC = () => {
                 </p>
             </header>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
                 {/* Left Column: Cereal Selection */}
                 <div className="lg:col-span-3 space-y-4">
                     <h3 className="text-xl font-heading text-gold mb-4">Select Vintage</h3>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0">
                         {CEREALS.map((cereal) => (
                             <button
                                 key={cereal.id}
@@ -34,7 +34,7 @@ export const PairingGuide: React.FC = () => {
                                     setSelectedMilk(null); // Reset milk on cereal change
                                 }}
                                 className={`
-                                    group p-4 text-left rounded-lg border transition-all duration-300 relative overflow-hidden
+                                    group p-4 text-left rounded-lg border transition-all duration-300 relative overflow-hidden flex-shrink-0 lg:flex-shrink min-w-[200px] lg:min-w-0
                                     ${selectedCereal.id === cereal.id
                                         ? 'bg-gradient-to-r from-merlot to-merlot-dark border-gold text-white shadow-[0_0_15px_rgba(212,175,55,0.2)]'
                                         : 'bg-white/5 border-white/5 text-zinc-400 hover:text-white hover:border-gold/30 hover:bg-white/10'}

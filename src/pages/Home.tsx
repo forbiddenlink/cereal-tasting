@@ -32,15 +32,11 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
     return (
         <div className="min-h-screen pb-12 pt-20">
             {/* Hero Section */}
-            <section className="relative h-[250px] flex items-center justify-center overflow-hidden">
-                {/* Background with subtle image */}
+            <section className="relative h-[280px] md:h-[350px] flex items-center justify-center overflow-hidden">
+                {/* Background with cereal-themed gradient */}
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-b from-void via-void/98 to-void z-10" />
-                    <img
-                        src="https://images.unsplash.com/photo-1599599810694-b5b37304c041?q=80&w=2623&auto=format&fit=crop"
-                        alt="Background"
-                        className="w-full h-full object-cover opacity-5"
-                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-merlot via-void to-void" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/5 to-transparent" />
                 </div>
 
                 {/* Floating particles */}
@@ -76,9 +72,9 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                         animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <h1 className="text-4xl md:text-6xl font-heading text-transparent bg-clip-text bg-gradient-to-b from-gold via-gold to-gold-dim drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] mb-4">
-                            🥣 Nostalgia. <br />
-                            <span className="font-serif italic text-cream bg-clip-text text-transparent bg-gradient-to-r from-cream to-white">Distilled.</span>
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading mb-4">
+                            <span className="block text-gold drop-shadow-[0_4px_20px_rgba(212,175,55,0.5)]">Nostalgia.</span>
+                            <span className="block text-3xl md:text-5xl lg:text-6xl font-serif italic text-cream/90 mt-2">Distilled.</span>
                         </h1>
                     </motion.div>
 
@@ -86,9 +82,9 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                         initial={{ y: 20, opacity: 0, filter: 'blur(4px)' }}
                         animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
                         transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        className="text-sm md:text-base text-gold/60 font-mono max-w-2xl mx-auto tracking-wide"
+                        className="text-sm md:text-base text-gold/50 font-mono max-w-2xl mx-auto tracking-wider uppercase text-center"
                     >
-                        A curated tasting experience for the discerning child at heart.
+                        A curated tasting experience for the discerning child at heart
                     </motion.p>
                 </motion.div>
             </section>
@@ -99,16 +95,16 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1 }}
-                className="relative z-10 -mt-20 mb-12"
+                className="relative z-10 -mt-16 mb-16"
             >
                 <div className="container mx-auto px-4">
-                    <div className="glass-panel-heavy rounded-2xl p-6 md:p-8">
+                    <div className="glass-panel-heavy rounded-2xl p-8 md:p-10 border border-gold/10">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                             {[
-                                { label: 'Vintage Years', value: '1982-2003', icon: '🕰️' },
-                                { label: 'Sugar Content', value: '12-22g', icon: '🍬' },
-                                { label: 'Nostalgia Score', value: '99/100', icon: '💫' },
-                                { label: 'Cavities Caused', value: '∞', icon: '🦷' },
+                                { label: 'Vintage Years', value: '1982-2003', symbol: '—' },
+                                { label: 'Sugar Content', value: '12-22g', symbol: '◇' },
+                                { label: 'Nostalgia Score', value: '99/100', symbol: '★' },
+                                { label: 'Cavities Caused', value: '∞', symbol: '✦' },
                             ].map((stat, index) => (
                                 <motion.div
                                     key={stat.label}
@@ -116,11 +112,11 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                                     whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                                    className="text-center space-y-2"
+                                    className="text-center space-y-3 p-4"
                                 >
-                                    <div className="text-4xl">{stat.icon}</div>
-                                    <div className="text-2xl md:text-3xl font-heading text-gold">{stat.value}</div>
-                                    <div className="text-xs md:text-sm text-cream/60 font-mono uppercase tracking-wider">{stat.label}</div>
+                                    <div className="text-5xl font-heading text-gold/40">{stat.symbol}</div>
+                                    <div className="text-3xl md:text-4xl font-heading text-gold tracking-tight">{stat.value}</div>
+                                    <div className="text-xs text-cream/50 font-mono uppercase tracking-[0.15em] border-t border-gold/20 pt-2">{stat.label}</div>
                                 </motion.div>
                             ))}
                         </div>
@@ -129,8 +125,16 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
             </motion.section>
 
             {/* Featured Collection */}
-            <section className="container mx-auto px-4 relative z-10 mb-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <section className="container mx-auto px-4 relative z-10 mb-16">
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-3xl md:text-4xl font-heading text-gold text-center mb-12 tracking-wide"
+                >
+                    THE COLLECTION
+                </motion.h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 max-w-7xl mx-auto">
                     {CEREALS.map((cereal, index) => (
                         <motion.div
                             key={cereal.id}

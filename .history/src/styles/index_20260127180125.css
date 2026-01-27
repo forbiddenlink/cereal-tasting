@@ -1,23 +1,8 @@
 @import './variables.css';
-@import "tailwindcss";
 
-@theme {
-  --color-void: #050505;
-  --color-merlot: #1a050d;
-  --color-merlot-dark: #0a0308;
-  --color-velvet: #3d0a1e;
-  --color-gold: #d4af37;
-  --color-gold-dim: #997b28;
-  --color-cream: #f0f0e0;
-  --color-slime: #39ff14;
-  --color-zap: #fff01f;
-  --color-berry: #ff10f0;
-  --color-cyan: #00f9ff;
-
-  --font-family-heading: 'Playfair Display', serif;
-  --font-family-body: 'Inter', system-ui, sans-serif;
-  --font-family-mono: 'JetBrains Mono', monospace;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 *,
 *::before,
