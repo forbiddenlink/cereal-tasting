@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280">
+  <!-- Trix Box -->
+  <defs>
+    <linearGradient id="trixGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF1493;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF69B4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF1493;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Box background -->
+  <rect width="200" height="280" fill="url(#trixGrad)" stroke="#FFD700" stroke-width="3"/>
+  
+  <!-- Rainbow stripes -->
+  <rect x="0" y="60" width="200" height="8" fill="#39FF14" opacity="0.7"/>
+  <rect x="0" y="72" width="200" height="8" fill="#00F9FF" opacity="0.7"/>
+  <rect x="0" y="84" width="200" height="8" fill="#FFF01F" opacity="0.7"/>
+  
+  <!-- Banner -->
+  <rect x="10" y="15" width="180" height="45" fill="#FFFFFF" stroke="#FFD700" stroke-width="2" rx="5"/>
+  
+  <!-- Title -->
+  <text x="100" y="45" font-family="'Playfair Display', serif" font-size="32" font-weight="bold" fill="#FF1493" text-anchor="middle">TRIX</text>
+  
+  <!-- Vintage -->
+  <text x="100" y="110" font-family="serif" font-size="11" fill="#FFFFFF" text-anchor="middle">VINTAGE 1991</text>
+  
+  <!-- Fruit shapes -->
+  <circle cx="50" cy="150" r="15" fill="#FF6B6B"/>
+  <circle cx="100" cy="140" r="18" fill="#39FF14"/>
+  <circle cx="150" cy="150" r="15" fill="#FFF01F"/>
+  <circle cx="75" cy="180" r="16" fill="#00F9FF"/>
+  <circle cx="125" cy="180" r="16" fill="#FF69B4"/>
+  
+  <!-- Tagline -->
+  <text x="100" y="220" font-family="serif" font-size="10" fill="#FFFFFF" text-anchor="middle">Silly Rabbit</text>
+  <text x="100" y="235" font-family="serif" font-size="10" fill="#FFFFFF" text-anchor="middle">Reserve</text>
+  
+  <!-- Stars -->
+  <text x="30" y="250" font-size="20" fill="#FFD700">★</text>
+  <text x="170" y="250" font-size="20" fill="#FFD700">★</text>
+</svg>
