@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" fill="none">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a0e26;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2b0a16;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Box Background -->
+  <rect width="300" height="400" fill="url(#grad2)"/>
+  <rect x="10" y="10" width="280" height="380" fill="none" stroke="#d4af37" stroke-width="2"/>
+  
+  <!-- Bat Wings -->
+  <path d="M 80 120 Q 70 100 60 120 L 70 130 Z" fill="#d4af37" opacity="0.6"/>
+  <path d="M 220 120 Q 230 100 240 120 L 230 130 Z" fill="#d4af37" opacity="0.6"/>
+  
+  <!-- Moon -->
+  <circle cx="150" cy="80" r="30" fill="#d4af37" opacity="0.4"/>
+  
+  <!-- Text -->
+  <text x="150" y="170" font-family="serif" font-size="28" font-weight="bold" fill="#d4af37" text-anchor="middle">
+    Count's
+  </text>
+  <text x="150" y="200" font-family="serif" font-size="28" font-weight="bold" fill="#d4af37" text-anchor="middle">
+    Estate
+  </text>
+  <text x="150" y="230" font-family="serif" font-size="24" fill="#d4af37" text-anchor="middle" font-style="italic">
+    Chocolate
+  </text>
+  <text x="150" y="260" font-family="serif" font-size="16" fill="#d4af37" text-anchor="middle" opacity="0.7">
+    Vintage 1982
+  </text>
+  
+  <!-- Decorative Marshmallows -->
+  <circle cx="80" cy="320" r="15" fill="#d4af37" opacity="0.3"/>
+  <circle cx="150" cy="340" r="18" fill="#d4af37" opacity="0.3"/>
+  <circle cx="220" cy="320" r="15" fill="#d4af37" opacity="0.3"/>
+</svg>

@@ -1,0 +1,34 @@
+---
+engines:
+  # Disable Pylint for this project (it's TypeScript/React, not Python)
+  pylint:
+    enabled: false
+  
+  # Disable PMD for node_modules
+  pmd:
+    enabled: true
+    exclude_paths:
+      - 'node_modules/**'
+  
+  # Disable Lizard for node_modules
+  lizard:
+    enabled: true
+    exclude_paths:
+      - 'node_modules/**'
+
+  # Enable ESLint for TypeScript/JavaScript
+  eslint:
+    enabled: true
+  
+  # Enable Trivy for security scanning
+  trivy:
+    enabled: true
+
+exclude_paths:
+  - 'node_modules/**'
+  - 'dist/**'
+  - 'build/**'
+  - '.vite/**'
+  - 'public/**'
+  - '**/*.config.js'
+  - '**/*.config.ts'
