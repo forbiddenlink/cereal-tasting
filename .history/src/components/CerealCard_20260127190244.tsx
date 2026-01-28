@@ -66,8 +66,9 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                     rotateX,
                     rotateY,
                     transformStyle: "preserve-3d",
+                    padding: '1.5rem',
                 }}
-                className="relative bg-gradient-to-br from-merlot/80 to-void/90 backdrop-blur-sm border border-gold/20 rounded-xl p-6 shadow-2xl group-hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] h-full flex flex-col"
+                className="relative bg-gradient-to-br from-merlot/80 to-void/90 backdrop-blur-sm border border-gold/20 rounded-xl shadow-2xl group-hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] h-full flex flex-col"
                 whileHover={{ boxShadow: '0 0 30px rgba(212,175,55,0.2)' }}
                 transition={springs.smooth}
             >

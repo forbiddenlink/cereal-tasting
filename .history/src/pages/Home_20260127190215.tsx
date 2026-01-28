@@ -59,7 +59,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
     const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
     return (
-        <div className="min-h-screen pb-12 pt-20">
+        <div className="min-h-screen pb-12 pt-24">
             {/* Hero Section */}
             <section className="relative h-[280px] md:h-[350px] flex items-center justify-center overflow-hidden">
                 {/* Background with cereal-themed gradient */}
@@ -127,7 +127,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                 className="relative z-10 -mt-16 mb-16"
             >
                 <div className="container mx-auto px-4">
-                    <div className="glass-panel-heavy rounded-2xl p-8 md:p-10 border border-gold/10">
+                    <div style={{ padding: '2rem' }} className="glass-panel-heavy rounded-2xl border border-gold/10">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                             {[
                                 { label: 'Vintage Years', value: '1982-2003', symbol: '—' },
@@ -159,9 +159,9 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="container mx-auto px-4 mb-8"
+                className="container mx-auto px-4 mb-12"
             >
-                <div className="flex flex-wrap gap-4 items-center justify-between bg-merlot/40 backdrop-blur-md rounded-xl p-6 border border-gold/10">
+                <div style={{ padding: '2rem' }} className="flex flex-wrap gap-4 items-center justify-between bg-merlot/40 backdrop-blur-md rounded-xl border border-gold/10">
                     {/* Price Filter */}
                     <div className="flex flex-wrap gap-2">
                         <span className="text-gold/60 text-sm font-mono uppercase tracking-wider mr-2 self-center">Filter:</span>

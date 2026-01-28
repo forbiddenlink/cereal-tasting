@@ -59,8 +59,9 @@ export const PairingGuide: React.FC = () => {
                                         }}
                                         whileHover={{ x: 4 }}
                                         whileTap={{ scale: 0.98 }}
+                                        style={{ padding: '1.5rem' }}
                                         className={`
-                                            w-full group p-8 text-left rounded-lg border-2 transition-all duration-300 relative overflow-hidden
+                                            w-full group text-left rounded-lg border-2 transition-all duration-300 relative overflow-hidden
                                             ${selectedCereal.id === cereal.id
                                                 ? 'bg-gradient-to-br from-gold/20 to-gold-dim/10 border-gold shadow-[0_0_20px_rgba(212,175,55,0.3)]'
                                                 : 'bg-merlot-dark/30 border-gold/10 hover:border-gold/30 hover:bg-merlot/40'}

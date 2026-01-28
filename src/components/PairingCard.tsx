@@ -47,7 +47,7 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
     }
 
     return (
-        <div className="glass-panel-heavy p-8 md:p-16 rounded-2xl relative overflow-hidden min-h-[400px] md:min-h-[500px] flex flex-col justify-center">
+        <div style={{ padding: 'clamp(2rem, 8vw, 4rem)' }} className="glass-panel-heavy rounded-2xl relative overflow-hidden min-h-[400px] md:min-h-[500px] flex flex-col justify-center">
             <div className="relative z-10 text-center">
                 <motion.div
                     key={cereal.id}

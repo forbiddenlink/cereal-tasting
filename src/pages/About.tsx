@@ -32,7 +32,8 @@ export const About: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="glass-panel-heavy p-12 rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
+                        style={{ padding: '3rem', marginBottom: '2rem' }}
+                        className="glass-panel-heavy rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-3xl group-hover:bg-gold/10 transition-all duration-500"></div>
                         <div className="relative z-10">
@@ -59,7 +60,8 @@ export const About: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="glass-panel-heavy [padding:3rem] rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
+                        style={{ padding: '3rem', marginBottom: '2rem' }}
+                        className="glass-panel-heavy rounded-2xl border-2 border-gold/20 relative overflow-hidden group hover:border-gold/40 transition-all duration-500"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-3xl group-hover:bg-gold/10 transition-all duration-500"></div>
                         <div className="relative z-10">
@@ -88,7 +90,8 @@ export const About: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="glass-panel-heavy [padding:3rem] md:[padding:4rem] rounded-2xl border-2 border-gold/20 relative overflow-hidden mb-16 hover:border-gold/40 transition-all duration-500"
+                    style={{ padding: 'clamp(3rem, 5vw, 4rem)' }}
+                    className="glass-panel-heavy rounded-2xl border-2 border-gold/20 relative overflow-hidden mb-16 hover:border-gold/40 transition-all duration-500"
                 >
                     <div className="absolute top-0 left-1/2 w-64 h-64 bg-gold/5 rounded-full blur-3xl -translate-x-1/2"></div>
                     <div className="relative z-10">
@@ -134,7 +137,8 @@ export const About: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="border-2 border-gold/30 [padding:3rem] md:[padding:4rem] rounded-2xl bg-gradient-to-br from-merlot/50 to-merlot-dark/50 relative overflow-hidden mb-16"
+                    style={{ padding: 'clamp(3rem, 5vw, 4rem)' }}
+                    className="border-2 border-gold/30 rounded-2xl bg-gradient-to-br from-merlot/50 to-merlot-dark/50 relative overflow-hidden mb-16"
                 >
                     <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-gold/5 rounded-full blur-3xl"></div>
                     <div className="relative z-10">

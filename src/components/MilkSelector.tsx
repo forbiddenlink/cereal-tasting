@@ -14,8 +14,9 @@ export const MilkSelector: React.FC<MilkSelectorProps> = ({ milks, selectedMilkI
                     <button
                         key={milk.id}
                         onClick={() => onSelect(milk)}
+                        style={{ padding: '1.5rem' }}
                         className={`
-                            w-full group relative p-8 rounded-lg text-left transition-all duration-500 overflow-hidden
+                            w-full group relative rounded-lg text-left transition-all duration-500 overflow-hidden
                             ${selectedMilkId === milk.id
                                 ? 'bg-gradient-to-r from-merlot to-merlot-dark border border-gold shadow-[0_0_20px_rgba(212,175,55,0.2)]'
                                 : 'bg-white/5 border border-white/5 hover:border-gold/30 hover:bg-white/10'}
