@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://forbiddenlink.github.io/cereal-tasting/sitemap.xml

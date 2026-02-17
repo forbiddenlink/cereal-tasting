@@ -1,13 +1,75 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import { useSearchParams } from 'react-router-dom';
 import { CEREALS, type Cereal } from '../data/mockData';
 import { MILKS, type Milk } from '../data/milks';
 import { MilkSelector } from '../components/MilkSelector';
 import { PairingCard } from '../components/PairingCard';
 
 export const PairingGuide: React.FC = () => {
-    const [selectedCereal, setSelectedCereal] = useState<Cereal>(CEREALS[0]);
-    const [selectedMilk, setSelectedMilk] = useState<Milk | null>(null);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [copied, setCopied] = React.useState(false);
+    const copyTimeoutRef = React.useRef<number | null>(null);
+
+    const selectedCereal: Cereal = React.useMemo(() => {
+        const cerealId = searchParams.get('cereal');
+        const matched = CEREALS.find((cereal) => cereal.id === cerealId);
+        return matched ?? CEREALS[0];
+    }, [searchParams]);
+
+    const selectedMilk: Milk | null = React.useMemo(() => {
+        const milkId = searchParams.get('milk');
+        if (!milkId) return null;
+        return MILKS.find((milk) => milk.id === milkId) ?? null;
+    }, [searchParams]);
+
+    const selectCereal = (cereal: Cereal) => {
+        const next = new URLSearchParams(searchParams);
+        next.set('cereal', cereal.id);
+        next.delete('milk');
+        setSearchParams(next, { replace: true });
+    };
+
+    const selectMilk = (milk: Milk) => {
+        const next = new URLSearchParams(searchParams);
+        next.set('cereal', selectedCereal.id);
+        next.set('milk', milk.id);
+        setSearchParams(next, { replace: true });
+    };
+
+    const copyShareLink = async () => {
+        const target = new URL(window.location.href);
+        target.pathname = '/pairings/';
+        target.searchParams.set('cereal', selectedCereal.id);
+        if (selectedMilk) {
+            target.searchParams.set('milk', selectedMilk.id);
+        } else {
+            target.searchParams.delete('milk');
+        }
+
+        try {
+            await navigator.clipboard.writeText(target.toString());
+        } catch {
+            window.prompt('Copy this pairing link:', target.toString());
+            return;
+        }
+        setCopied(true);
+        if (copyTimeoutRef.current !== null) {
+            window.clearTimeout(copyTimeoutRef.current);
+        }
+        copyTimeoutRef.current = window.setTimeout(() => {
+            setCopied(false);
+            copyTimeoutRef.current = null;
+        }, 1800);
+    };
+
+    React.useEffect(() => {
+        return () => {
+            if (copyTimeoutRef.current !== null) {
+                window.clearTimeout(copyTimeoutRef.current);
+            }
+        };
+    }, []);
 
     return (
         <div className="min-h-screen pt-40 pb-20 px-4">
@@ -30,6 +92,19 @@ export const PairingGuide: React.FC = () => {
                         A precise calibration of viscosity against crunch. We simulate the degradation rate
                         of the cereal matrix when introduced to various solvents. Choose wisely.
                     </p>
+                    <div className="mt-6">
+                        <button
+                            type="button"
+                            onClick={copyShareLink}
+                            className={`px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider border transition-colors ${
+                                copied
+                                    ? 'border-slime/60 text-slime bg-slime/10'
+                                    : 'border-gold/30 text-gold/70 hover:border-gold/60'
+                            }`}
+                        >
+                            {copied ? 'Link Copied' : 'Copy This Pairing Link'}
+                        </button>
+                    </div>
                     <div className="w-16 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-8"></div>
                 </motion.header>
 
@@ -54,8 +129,7 @@ export const PairingGuide: React.FC = () => {
                                     <motion.button
                                         key={cereal.id}
                                         onClick={() => {
-                                            setSelectedCereal(cereal);
-                                            setSelectedMilk(null);
+                                            selectCereal(cereal);
                                         }}
                                         whileHover={{ x: 4 }}
                                         whileTap={{ scale: 0.98 }}
@@ -111,7 +185,7 @@ export const PairingGuide: React.FC = () => {
                             <MilkSelector
                                 milks={MILKS}
                                 selectedMilkId={selectedMilk?.id || null}
-                                onSelect={setSelectedMilk}
+                                onSelect={selectMilk}
                             />
                         </div>
                     </motion.div>

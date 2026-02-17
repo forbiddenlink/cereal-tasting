@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { springs, fadeInUp, scaleIn } from '../utils/motion';
 
 interface CerealRatingProps {
@@ -7,18 +7,44 @@ interface CerealRatingProps {
     initialRating?: number;
 }
 
-export const CerealRating: React.FC<CerealRatingProps> = ({ initialRating = 0 }) => {
-    const [rating, setRating] = useState(initialRating);
+export const CerealRating: React.FC<CerealRatingProps> = ({ cerealId, initialRating = 0 }) => {
+    const storageKey = cerealId ? `cereal-cellar-rating-${cerealId}` : null;
+    const [rating, setRating] = useState(() => {
+        if (!storageKey) return initialRating;
+        const persisted = window.localStorage.getItem(storageKey);
+        const parsed = persisted ? Number.parseInt(persisted, 10) : Number.NaN;
+        return Number.isFinite(parsed) && parsed >= 1 && parsed <= 5 ? parsed : initialRating;
+    });
     const [hoverRating, setHoverRating] = useState(0);
     const [submitted, setSubmitted] = useState(false);
+    const timeoutRef = useRef<number | null>(null);
 
     const handleRate = (value: number) => {
         setRating(value);
         setSubmitted(true);
 
         // Reset submitted state after 2 seconds
-        setTimeout(() => setSubmitted(false), 2000);
+        if (timeoutRef.current !== null) {
+            window.clearTimeout(timeoutRef.current);
+        }
+        timeoutRef.current = window.setTimeout(() => {
+            setSubmitted(false);
+            timeoutRef.current = null;
+        }, 2000);
     };
+
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current !== null) {
+                window.clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!storageKey) return;
+        window.localStorage.setItem(storageKey, String(rating));
+    }, [rating, storageKey]);
 
     const ratingLabels = [
         "Soggy Disappointment",
@@ -37,12 +63,15 @@ export const CerealRating: React.FC<CerealRatingProps> = ({ initialRating = 0 })
                     return (
                         <motion.button
                             key={star}
+                            type="button"
                             onHoverStart={() => setHoverRating(star)}
                             onHoverEnd={() => setHoverRating(0)}
                             onClick={() => handleRate(star)}
                             whileHover={{ scale: 1.15, transition: springs.snappy }}
                             whileTap={{ scale: 0.9, transition: springs.snappy }}
-                            className="relative focus:outline-none"
+                            className="relative focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 rounded-md"
+                            aria-label={`Rate ${star} out of 5`}
+                            aria-pressed={rating === star}
                         >
                             <motion.div
                                 initial={false}
@@ -91,7 +120,7 @@ export const CerealRating: React.FC<CerealRatingProps> = ({ initialRating = 0 })
                         exit="exit"
                         className="text-center"
                     >
-                        <span className="text-sm text-slime font-mono">
+                        <span className="text-sm text-slime font-mono" aria-live="polite">
                             ✓ Your refined palate has been recorded
                         </span>
                     </motion.div>

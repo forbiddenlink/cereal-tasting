@@ -2,6 +2,7 @@ import React from 'react';
 import type { Cereal } from '../data/mockData';
 import type { Milk } from '../data/milks';
 import { motion, AnimatePresence } from 'framer-motion';
+import cerealFallback from '../assets/cereal-fallback.svg';
 
 interface PairingCardProps {
     cereal: Cereal;
@@ -70,11 +71,11 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
                         animate={{ x: 0, opacity: 1 }}
                         className="w-32 h-44 sm:w-40 sm:h-52 bg-gradient-to-tr from-zinc-800 to-zinc-700 border border-white/10 rounded-lg flex items-center justify-center shadow-2xl relative overflow-hidden group">
                         <img 
-                            src={`/src/assets/${cereal.image}`} 
+                            src={cereal.image}
                             alt={cereal.name} 
                             className="w-full h-full object-contain p-4 z-10 max-w-[120px] max-h-[160px]"
                             onError={(e) => {
-                                e.currentTarget.src = 'https://via.placeholder.com/120x160/3f3f46/d4af37?text=' + encodeURIComponent(cereal.name);
+                                e.currentTarget.src = cerealFallback;
                             }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-0" />

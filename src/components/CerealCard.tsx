@@ -1,8 +1,9 @@
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import type { Cereal } from '../data/mockData';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CerealRating } from './CerealRating';
 import { springs } from '../utils/motion';
+import cerealFallback from '../assets/cereal-fallback.svg';
 
 interface CerealCardProps {
     cereal: Cereal;
@@ -12,6 +13,7 @@ interface CerealCardProps {
 
 export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddToCart }) => {
     const ref = useRef<HTMLDivElement>(null);
+    const addedToCartTimeoutRef = useRef<number | null>(null);
     const [showDetails, setShowDetails] = useState(false);
     const [addedToCart, setAddedToCart] = useState(false);
 
@@ -46,8 +48,27 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
         if (onAddToCart) {
             onAddToCart(cereal);
             setAddedToCart(true);
-            setTimeout(() => setAddedToCart(false), 2000);
+            if (addedToCartTimeoutRef.current !== null) {
+                window.clearTimeout(addedToCartTimeoutRef.current);
+            }
+            addedToCartTimeoutRef.current = window.setTimeout(() => {
+                setAddedToCart(false);
+                addedToCartTimeoutRef.current = null;
+            }, 2000);
         }
+    };
+
+    useEffect(() => {
+        return () => {
+            if (addedToCartTimeoutRef.current !== null) {
+                window.clearTimeout(addedToCartTimeoutRef.current);
+            }
+        };
+    }, []);
+
+    const handleCardToggle = () => {
+        setShowDetails((prev) => !prev);
+        onSelect?.(cereal);
     };
 
     return (
@@ -56,10 +77,17 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
             className="relative w-full h-full cursor-pointer group [perspective:1000px]"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            onClick={() => {
-                setShowDetails(!showDetails);
-                onSelect?.(cereal);
+            onClick={handleCardToggle}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardToggle();
+                }
             }}
+            role="button"
+            tabIndex={0}
+            aria-expanded={showDetails}
+            aria-controls={`details-${cereal.id}`}
         >
             <motion.div
                 style={{
@@ -82,11 +110,11 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                     className="relative w-full h-48 mx-auto mb-3 flex items-center justify-center overflow-hidden"
                 >
                     <img
-                        src={`/src/assets/${cereal.image}`}
+                        src={cereal.image}
                         alt={cereal.name}
                         className="max-w-[160px] max-h-[180px] w-auto h-auto object-contain drop-shadow-2xl"
                         onError={(e) => {
-                            e.currentTarget.src = 'https://via.placeholder.com/150x200/1a050d/d4af37?text=' + encodeURIComponent(cereal.name);
+                            e.currentTarget.src = cerealFallback;
                         }}
                     />
                 </div>
@@ -177,6 +205,7 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                         }}
                         transition={springs.smooth}
                         className="overflow-hidden"
+                        id={`details-${cereal.id}`}
                     >
                         <div className="pt-4 mt-4 border-t border-white/10 space-y-4">
                             {/* Full Tasting Notes */}

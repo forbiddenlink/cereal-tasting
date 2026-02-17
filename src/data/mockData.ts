@@ -44,7 +44,7 @@ export const CEREALS: Cereal[] = [
             nostalgia: 90,
             particulate: 60
         },
-        image: 'cereal-box-1.svg',
+        image: '/cereals/cereal-box-1.png',
         brandColor: 'var(--color-gold)',
         recommendedMilkPairing: 'm1'
     },
@@ -69,7 +69,7 @@ export const CEREALS: Cereal[] = [
             nostalgia: 98,
             particulate: 85
         },
-        image: 'cereal-box-2.svg',
+        image: '/cereals/cereal-box-2.png',
         brandColor: 'var(--color-merlot)',
         recommendedMilkPairing: 'm3'
     },
@@ -94,7 +94,7 @@ export const CEREALS: Cereal[] = [
             nostalgia: 70,
             particulate: 95
         },
-        image: 'cereal-box-3.svg',
+        image: '/cereals/cereal-box-3.png',
         brandColor: 'var(--color-slime)',
         recommendedMilkPairing: 'm4'
     },
@@ -119,7 +119,7 @@ export const CEREALS: Cereal[] = [
             nostalgia: 95,
             particulate: 40
         },
-        image: 'cereal-box-4.svg',
+        image: '/cereals/cereal-box-4.png',
         brandColor: 'var(--color-zap)',
         recommendedMilkPairing: 'm2'
     },
@@ -144,7 +144,7 @@ export const CEREALS: Cereal[] = [
             nostalgia: 88,
             particulate: 70
         },
-        image: 'cereal-box-5.svg',
+        image: '/cereals/cereal-box-5.png',
         brandColor: 'var(--color-gold)',
         recommendedMilkPairing: 'm3'
     },
@@ -169,7 +169,7 @@ export const CEREALS: Cereal[] = [
             nostalgia: 99,
             particulate: 88
         },
-        image: 'cereal-box-6.svg',
+        image: '/cereals/cereal-box-6.png',
         brandColor: 'var(--color-berry)',
         recommendedMilkPairing: 'm4'
     },
@@ -194,7 +194,7 @@ export const CEREALS: Cereal[] = [
             nostalgia: 92,
             particulate: 75
         },
-        image: 'cereal-box-7.svg',
+        image: '/cereals/cereal-box-7.png',
         brandColor: '#8B4513',
         recommendedMilkPairing: 'm3'
     },
@@ -219,7 +219,7 @@ export const CEREALS: Cereal[] = [
             nostalgia: 96,
             particulate: 92
         },
-        image: 'cereal-box-8.svg',
+        image: '/cereals/cereal-box-8.png',
         brandColor: '#FF1493',
         recommendedMilkPairing: 'm4'
     },
@@ -244,7 +244,157 @@ export const CEREALS: Cereal[] = [
             nostalgia: 85,
             particulate: 45
         },
-        image: 'cereal-box-9.svg',
+        image: '/cereals/cereal-box-9.png',
+        brandColor: '#FFD700',
+        recommendedMilkPairing: 'm2'
+    },
+    {
+        id: 'c10',
+        name: "Grape-Nuts: The Forbidden Gravel",
+        vintage: 1978,
+        region: "Quarry of Despair",
+        price: 2100.00,
+        tastingNotes: [
+            "Dental work not included",
+            "Texture of artisanal pebbles",
+            "Requires milk-to-cement ratio calculations"
+        ],
+        specs: {
+            decayRate: 999,
+            sugarContent: 5,
+        },
+        flavor: {
+            crunch: 100,
+            sweetness: 15,
+            nostalgia: 75,
+            particulate: 20
+        },
+        image: '/cereals/cereal-box-10.png',
+        brandColor: '#8B4513',
+        recommendedMilkPairing: 'm1'
+    },
+    {
+        id: 'c11',
+        name: "Reese's Puffs: Breakfast Candy Legitimized",
+        vintage: 1998,
+        region: "Chocolate Peanut Butter Nexus",
+        price: 890.00,
+        tastingNotes: [
+            "Legally distinct from actual Reese's",
+            "Breakfast justification for dessert",
+            "Peanut butter dust cloud hazard"
+        ],
+        specs: {
+            decayRate: 38,
+            sugarContent: 21,
+        },
+        flavor: {
+            crunch: 78,
+            sweetness: 93,
+            nostalgia: 91,
+            particulate: 82
+        },
+        image: '/cereals/cereal-box-11.png',
+        brandColor: '#FF8C00',
+        recommendedMilkPairing: 'm3'
+    },
+    {
+        id: 'c12',
+        name: "Cookie Crisp: The Cookie Heist Collection",
+        vintage: 1990,
+        region: "Cookie Jar Underworld",
+        price: 725.00,
+        tastingNotes: [
+            "Tiny cookies that aren't cookies",
+            "Criminal dog mascot energy",
+            "Breakfast loophole exploitation"
+        ],
+        specs: {
+            decayRate: 42,
+            sugarContent: 19,
+        },
+        flavor: {
+            crunch: 70,
+            sweetness: 89,
+            nostalgia: 94,
+            particulate: 78
+        },
+        image: '/cereals/cereal-box-12.png',
+        brandColor: '#8B4513',
+        recommendedMilkPairing: 'm3'
+    },
+    {
+        id: 'c13',
+        name: "Apple Jacks: The Flavor Paradox",
+        vintage: 1985,
+        region: "Non-Apple Orchards",
+        price: 680.00,
+        tastingNotes: [
+            "Contains no actual apple",
+            "Cinnamon masquerading as fruit",
+            "Existential flavor crisis"
+        ],
+        specs: {
+            decayRate: 55,
+            sugarContent: 17,
+        },
+        flavor: {
+            crunch: 85,
+            sweetness: 82,
+            nostalgia: 87,
+            particulate: 65
+        },
+        image: '/cereals/cereal-box-13.png',
+        brandColor: '#FF6347',
+        recommendedMilkPairing: 'm2'
+    },
+    {
+        id: 'c14',
+        name: "Fruity Pebbles: Bedrock's Finest",
+        vintage: 1993,
+        region: "Prehistoric Quarry",
+        price: 1050.00,
+        tastingNotes: [
+            "Yabba-dabba-delicious trademark infringement",
+            "Turns milk into rainbow sludge",
+            "Fred Flintstone's retirement fund"
+        ],
+        specs: {
+            decayRate: 30,
+            sugarContent: 20,
+        },
+        flavor: {
+            crunch: 68,
+            sweetness: 91,
+            nostalgia: 97,
+            particulate: 90
+        },
+        image: '/cereals/cereal-box-14.png',
+        brandColor: '#FF1493',
+        recommendedMilkPairing: 'm4'
+    },
+    {
+        id: 'c15',
+        name: "Corn Pops: The Golden Sphere Vintage",
+        vintage: 1987,
+        region: "Spherical Corn Fields",
+        price: 595.00,
+        tastingNotes: [
+            "Geometrically perfect corn spheres",
+            "Pops that don't actually pop",
+            "Suspiciously uniform golden coating"
+        ],
+        specs: {
+            decayRate: 48,
+            sugarContent: 18,
+        },
+        flavor: {
+            crunch: 80,
+            sweetness: 86,
+            nostalgia: 83,
+            particulate: 55
+        },
+        image: '/cereals/cereal-box-15.png',
         brandColor: '#FFD700',
         recommendedMilkPairing: 'm2'
     }

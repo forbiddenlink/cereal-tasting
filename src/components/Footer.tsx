@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { springs } from '../utils/motion';
 
 export const Footer: React.FC = () => {
@@ -17,15 +18,18 @@ export const Footer: React.FC = () => {
 
                     {/* Links */}
                     <div className="flex gap-6">
-                        {['Instagram', 'Twitter', 'Newsletter'].map((link) => (
-                            <motion.a
-                                key={link}
-                                href="#"
+                        {[
+                            { label: 'About', to: '/about/' },
+                            { label: 'Contact', to: '/contact/' },
+                            { label: 'Privacy', to: '/privacy-policy/' },
+                        ].map((link) => (
+                            <motion.div
+                                key={link.label}
                                 whileHover={{ scale: 1.05, color: 'var(--color-slime)', transition: springs.snappy }}
                                 className="text-sm font-mono text-cream/60"
                             >
-                                {link}
-                            </motion.a>
+                                <Link to={link.to}>{link.label}</Link>
+                            </motion.div>
                         ))}
                     </div>
 
