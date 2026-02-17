@@ -138,7 +138,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
         <div className="min-h-screen pb-12 pt-24">
             {/* Hero Section */}
             <section
-                className="relative h-[280px] md:h-[350px] flex items-center justify-center overflow-hidden"
+                className="relative min-h-[450px] flex flex-col items-center justify-center overflow-hidden"
                 onMouseMove={(event) => {
                     const rect = event.currentTarget.getBoundingClientRect();
                     const x = ((event.clientX - rect.left) / rect.width) * 100;
@@ -184,6 +184,28 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                     </div>
                 )}
 
+                {/* Floating Banner (Moved Above Title) */}
+                <div className="relative w-full bg-gradient-to-r from-merlot-dark/80 via-merlot/50 to-merlot-dark/80 border-y border-gold/10 py-2 z-30 overflow-hidden mb-8">
+                    <div className="marquee-track">
+                        <span>Vintage Crunch Index</span>
+                        <span>•</span>
+                        <span>Laboratory Pairings</span>
+                        <span>•</span>
+                        <span>Collector Editions</span>
+                        <span>•</span>
+                        <span>Peak Nostalgia Assurance</span>
+                        <span>•</span>
+                        <span aria-hidden="true">Vintage Crunch Index</span>
+                        <span aria-hidden="true">•</span>
+                        <span aria-hidden="true">Laboratory Pairings</span>
+                        <span aria-hidden="true">•</span>
+                        <span aria-hidden="true">Collector Editions</span>
+                        <span aria-hidden="true">•</span>
+                        <span aria-hidden="true">Peak Nostalgia Assurance</span>
+                        <span aria-hidden="true">•</span>
+                    </div>
+                </div>
+
                 {/* Content */}
                 <motion.div
                     style={shouldReduceMotion ? undefined : { y: heroY, opacity: heroOpacity }}
@@ -209,27 +231,6 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                         A curated tasting experience for the discerning child at heart
                     </motion.p>
                 </motion.div>
-
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-merlot-dark/80 via-merlot/50 to-merlot-dark/80 border-t border-gold/10 py-2 z-30 overflow-hidden">
-                    <div className="marquee-track">
-                        <span>Vintage Crunch Index</span>
-                        <span>•</span>
-                        <span>Laboratory Pairings</span>
-                        <span>•</span>
-                        <span>Collector Editions</span>
-                        <span>•</span>
-                        <span>Peak Nostalgia Assurance</span>
-                        <span>•</span>
-                        <span aria-hidden="true">Vintage Crunch Index</span>
-                        <span aria-hidden="true">•</span>
-                        <span aria-hidden="true">Laboratory Pairings</span>
-                        <span aria-hidden="true">•</span>
-                        <span aria-hidden="true">Collector Editions</span>
-                        <span aria-hidden="true">•</span>
-                        <span aria-hidden="true">Peak Nostalgia Assurance</span>
-                        <span aria-hidden="true">•</span>
-                    </div>
-                </div>
             </section>
 
             {/* Stats Section - Fun Facts */}

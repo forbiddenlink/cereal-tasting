@@ -128,7 +128,80 @@ export const About: React.FC = () => {
                     </div>
                 </motion.div>
 
-                {/* Section 4 - Tech Stack (Portfolio) */}
+                {/* Section 4 - Press Mentions & Awards */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="glass-panel-heavy rounded-2xl border-2 border-gold/20 relative overflow-hidden mb-16 hover:border-gold/40 transition-all duration-500 p-12"
+                >
+                    <div className="absolute top-0 right-0 w-48 h-48 bg-slime/5 rounded-full blur-3xl"></div>
+                    <div className="relative z-10">
+                        <div className="text-center mb-10">
+                            <div className="w-16 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-6"></div>
+                            <h2 className="text-4xl font-heading text-gold mb-4">Press & Accolades</h2>
+                            <p className="text-cream/60 font-mono text-sm tracking-wider uppercase">
+                                What they're saying (probably)
+                            </p>
+                        </div>
+
+                        {/* Press Quotes */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                            {[
+                                { quote: "Absolutely ridiculous", source: "The New York Times", attribution: "(probably)" },
+                                { quote: "Why does this exist?", source: "Cereal Enthusiast Monthly", attribution: "(we made this up)" },
+                                { quote: "I laughed, I cried, I ate cereal", source: "Anonymous Sommelier", attribution: "(our mom)" },
+                                { quote: "This is either genius or insanity", source: "Food & Wine", attribution: "(it's both)" },
+                            ].map((item, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="bg-merlot/30 border border-gold/10 rounded-lg p-6 hover:border-gold/30 transition-all duration-300"
+                                >
+                                    <p className="text-cream/80 italic text-lg mb-3">"{item.quote}"</p>
+                                    <div className="flex items-center justify-between">
+                                        <p className="text-gold text-sm font-heading">— {item.source}</p>
+                                        <p className="text-cream/40 text-xs font-mono">{item.attribution}</p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Awards */}
+                        <div className="border-t border-gold/10 pt-8">
+                            <h3 className="text-2xl font-heading text-gold mb-6 text-center">Awards & Recognition</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {[
+                                    { award: "Best Use of Nostalgia", year: "2026", org: "Portfolio Awards" },
+                                    { award: "Most Pretentious Cereal Site", year: "2026", org: "Web Design Weekly" },
+                                    { award: "Excellence in Satire", year: "2026", org: "Internet Comedy Guild" },
+                                ].map((item, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="text-center p-4 rounded-lg bg-gold/5 border border-gold/20 hover:bg-gold/10 transition-all duration-300"
+                                    >
+                                        <div className="text-3xl mb-2">🏆</div>
+                                        <p className="text-cream/90 font-heading text-sm mb-1">{item.award}</p>
+                                        <p className="text-gold/60 text-xs font-mono">{item.org} • {item.year}</p>
+                                    </motion.div>
+                                ))}
+                            </div>
+                            <p className="text-center text-cream/30 text-xs font-mono mt-6 italic">
+                                (All awards are fictional and self-awarded)
+                            </p>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Section 5 - Tech Stack (Portfolio) */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}

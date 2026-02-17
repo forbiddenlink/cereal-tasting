@@ -141,7 +141,7 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                         </div>
                         <motion.button
                             onClick={handleAddToCart}
-                            className="relative bg-gradient-to-br from-gold via-gold-dim to-[#8B7000] text-void px-5 py-3 rounded-lg font-heading font-bold text-sm uppercase tracking-wider overflow-hidden shadow-[0_8px_24px_rgba(212,175,55,0.5)] border-2 border-gold-dim/40 hover:border-gold transition-all duration-300"
+                            className="relative z-30 transform-[translateZ(30px)] bg-gradient-to-br from-gold via-gold-dim to-[#8B7000] text-void px-5 py-3 rounded-lg font-heading font-bold text-sm uppercase tracking-wider overflow-hidden shadow-[0_8px_24px_rgba(212,175,55,0.5)] border-2 border-gold-dim/40 hover:border-gold transition-all duration-300"
                             whileHover={{ 
                                 scale: 1.08, 
                                 y: -2,
