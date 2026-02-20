@@ -135,7 +135,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
     const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
     return (
-        <div className="min-h-screen pb-12 pt-24">
+        <div className="min-h-screen py-24">
             {/* Hero Section */}
             <section
                 className="relative min-h-[450px] flex flex-col items-center justify-center overflow-hidden"
@@ -217,8 +217,8 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     >
                         <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading mb-4">
-                            <span className="block text-gold drop-shadow-[0_4px_20px_rgba(212,175,55,0.5)]">Nostalgia.</span>
-                            <span className="block text-3xl md:text-5xl lg:text-6xl font-serif italic text-cream/90 mt-2">Distilled.</span>
+                            <span className="block text-cream/90 drop-shadow-2xl">Nostalgia.</span>
+                            <span className="block text-3xl md:text-5xl lg:text-6xl font-serif italic text-gold mt-2">Distilled.</span>
                         </h1>
                     </motion.div>
 
@@ -241,8 +241,8 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                 transition={{ duration: 1 }}
                 className="relative z-10 -mt-16 mb-16"
             >
-                <div className="container mx-auto px-4">
-                    <div style={{ padding: '2rem' }} className="glass-panel-heavy rounded-2xl border border-gold/10">
+                <div className="w-full border-y border-white/5 bg-void py-12">
+                    <div className="container mx-auto px-4">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                             {[
                                 { label: 'Vintage Years', value: '1982-2003', symbol: '—' },
@@ -276,7 +276,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                 transition={{ duration: 0.6 }}
                 className="container mx-auto px-4 mb-12"
             >
-                <div style={{ padding: '2rem' }} className="flex flex-wrap gap-4 items-center justify-between bg-merlot/40 backdrop-blur-md rounded-xl border border-gold/10">
+                <div className="p-8 flex flex-wrap gap-4 items-center justify-between bg-merlot-dark/40 backdrop-blur-md rounded-xl border border-gold/10">
                     {/* Price Filter */}
                     <div className="flex flex-wrap gap-2">
                         <span className="text-gold/60 text-sm font-mono uppercase tracking-wider mr-2 self-center">Filter:</span>
@@ -284,10 +284,10 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                             <motion.button
                                 key={filter.value}
                                 onClick={() => updateSearchParam('price', filter.value)}
-                                className={`px-4 py-2 rounded-lg text-xs font-heading font-bold uppercase tracking-wide transition-all duration-300 ${
+                                className={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wide transition-all duration-300 border ${
                                     filterPriceRange === filter.value
-                                        ? 'bg-gradient-to-br from-gold via-gold-dim to-[#8B7000] text-void shadow-[0_4px_16px_rgba(212,175,55,0.5)] border-2 border-gold-dim'
-                                        : 'bg-merlot-dark/50 text-gold/60 border border-gold/20 hover:border-gold/40 hover:text-gold'
+                                        ? 'border-gold text-gold bg-gold/10'
+                                        : 'border-white/10 text-cream/70 hover:border-gold/30 hover:text-gold bg-transparent'
                                 }`}
                                 whileHover={{ scale: 1.05, y: -1 }}
                                 whileTap={{ scale: 0.95 }}
@@ -304,10 +304,10 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                             <motion.button
                                 key={sort.value}
                                 onClick={() => updateSearchParam('sort', sort.value)}
-                                className={`px-4 py-2 rounded-lg text-xs font-heading font-bold uppercase tracking-wide transition-all duration-300 ${
+                                className={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wide transition-all duration-300 border ${
                                     sortBy === sort.value
-                                        ? 'bg-gradient-to-br from-gold via-gold-dim to-[#8B7000] text-void shadow-[0_4px_16px_rgba(212,175,55,0.5)] border-2 border-gold-dim'
-                                        : 'bg-merlot-dark/50 text-gold/60 border border-gold/20 hover:border-gold/40 hover:text-gold'
+                                        ? 'border-gold text-gold bg-gold/10'
+                                        : 'border-white/10 text-cream/70 hover:border-gold/30 hover:text-gold bg-transparent'
                                 }`}
                                 whileHover={{ scale: 1.05, y: -1 }}
                                 whileTap={{ scale: 0.95 }}

@@ -4,7 +4,7 @@
 @theme {
   --color-void: #050505;
   --color-merlot: #1a050d;
-  --color-merlot-dark: #0a0308;
+  --color-merlot-dark: #050505;
   --color-velvet: #3d0a1e;
   --color-gold: #d4af37;
   --color-gold-dim: #997b28;
@@ -257,8 +257,8 @@ a:hover {
   white-space: nowrap;
   min-width: 200%;
   animation: marquee-scroll 26s linear infinite;
-  color: rgba(212, 175, 55, 0.7);
-  font-size: 0.68rem;
+  color: rgba(255, 253, 240, 0.5);
+  font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-family: var(--font-mono);
@@ -279,7 +279,7 @@ a:hover {
   left: -8vw;
   background: radial-gradient(
     circle at 40% 40%,
-    rgba(212, 175, 55, 0.35),
+    rgba(212, 175, 55, 0.05),
     rgba(212, 175, 55, 0)
   );
   animation: ambient-drift-a 22s ease-in-out infinite;
@@ -292,7 +292,7 @@ a:hover {
   right: -12vw;
   background: radial-gradient(
     circle at 40% 40%,
-    rgba(255, 16, 240, 0.23),
+    rgba(255, 16, 240, 0.05),
     rgba(255, 16, 240, 0)
   );
   animation: ambient-drift-b 26s ease-in-out infinite;
@@ -305,7 +305,7 @@ a:hover {
   left: 20vw;
   background: radial-gradient(
     circle at 40% 40%,
-    rgba(57, 255, 20, 0.2),
+    rgba(57, 255, 20, 0.05),
     rgba(57, 255, 20, 0)
   );
   animation: ambient-drift-c 30s ease-in-out infinite;

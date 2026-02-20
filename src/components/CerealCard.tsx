@@ -24,8 +24,8 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
     const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
     const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
 
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["15deg", "-15deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-15deg", "15deg"]);
+    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["3deg", "-3deg"]);
+    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-3deg", "3deg"]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!ref.current) return;
@@ -74,7 +74,7 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
     return (
         <motion.div
             ref={ref}
-            className="relative w-full h-full cursor-pointer group [perspective:1000px]"
+            className="relative w-full h-full cursor-pointer group [perspective:1000px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-4 focus-visible:ring-offset-void rounded-xl"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             onClick={handleCardToggle}
@@ -96,14 +96,10 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                     transformStyle: "preserve-3d",
                     padding: '1.5rem',
                 }}
-                className="relative bg-gradient-to-br from-merlot/80 to-void/90 backdrop-blur-sm border border-gold/20 rounded-xl shadow-2xl group-hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] h-full flex flex-col"
-                whileHover={{ boxShadow: '0 0 30px rgba(212,175,55,0.2)' }}
+                className="relative bg-merlot/10 backdrop-blur-md border border-gold/10 rounded-xl shadow-2xl transition-all duration-500 h-full flex flex-col"
+                whileHover={{ y: -4, borderColor: 'rgba(212,175,55,0.3)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.6)' }}
                 transition={springs.smooth}
             >
-                {/* Vintage Badge */}
-                <div className="absolute -top-3 -right-3 z-20 bg-gold text-void font-heading font-bold px-3 py-1 text-xs rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.5)] border-2 border-void/20 transform rotate-12 group-hover:rotate-0 transition-all duration-300 group-hover:scale-110">
-                    {cereal.vintage}
-                </div>
 
                 {/* Cereal Box Image */}
                 <div
@@ -121,8 +117,11 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
 
                 {/* Content */}
                 <div className="text-center transform-style-3d transform-[translateZ(10px)] flex-1 flex flex-col">
-                    <h3 className="text-lg font-heading text-gold mb-2 group-hover:text-cream transition-colors leading-tight tracking-wide">
+                    <h3 className="text-lg font-heading text-gold mb-2 group-hover:text-cream transition-colors leading-tight tracking-wide font-medium">
                         {cereal.name}
+                        <span className="inline-block border border-gold text-gold text-[10px] rounded-sm px-1.5 py-0.5 ml-2 align-middle font-mono tracking-normal leading-none font-normal opacity-80">
+                            {cereal.vintage}
+                        </span>
                     </h3>
                     <p className="text-[10px] font-mono text-gold/40 uppercase tracking-wider mb-4">{cereal.region}</p>
 
@@ -141,55 +140,32 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                         </div>
                         <motion.button
                             onClick={handleAddToCart}
-                            className="relative z-30 transform-[translateZ(30px)] bg-gradient-to-br from-gold via-gold-dim to-[#8B7000] text-void px-5 py-3 rounded-lg font-heading font-bold text-sm uppercase tracking-wider overflow-hidden shadow-[0_8px_24px_rgba(212,175,55,0.5)] border-2 border-gold-dim/40 hover:border-gold transition-all duration-300"
-                            whileHover={{ 
-                                scale: 1.08, 
-                                y: -2,
-                                boxShadow: '0 12px 40px rgba(212,175,55,0.7)',
-                                borderColor: 'rgba(212,175,55,0.8)'
-                            }}
-                            whileTap={{ scale: 0.96, y: 0 }}
-                            transition={springs.snappy}
+                            className={`relative z-30 border border-gold px-4 py-2 rounded-md font-mono text-[10px] uppercase tracking-wider transition-colors duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-void ${addedToCart ? 'bg-gold text-void font-heading capitalize text-sm' : 'bg-transparent text-gold hover:bg-gold hover:text-void'}`}
+                            whileHover={addedToCart ? {} : { y: -1 }}
+                            whileTap={addedToCart ? {} : { scale: 0.98, y: 0 }}
                         >
-                            {/* Shine effect */}
-                            <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                                initial={{ x: '-100%' }}
-                                whileHover={{ x: '100%' }}
-                                transition={{ duration: 0.6 }}
-                            />
                             <AnimatePresence mode="wait">
                                 {addedToCart ? (
                                     <motion.span
                                         key="added"
-                                        initial={{ y: 12, opacity: 0, filter: 'blur(4px)' }}
-                                        animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-                                        exit={{ y: -12, opacity: 0, filter: 'blur(4px)' }}
-                                        transition={springs.snappy}
-                                        className="flex items-center justify-center gap-2 relative z-10"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="flex items-center justify-center gap-2 relative z-10 w-full font-serif font-medium"
                                     >
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                        </svg>
-                                        <span className="font-extrabold">Added!</span>
+                                        <span>Acquired</span>
                                     </motion.span>
                                 ) : (
                                     <motion.span
                                         key="add"
-                                        initial={{ y: 12, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        exit={{ y: -12, opacity: 0 }}
-                                        transition={springs.snappy}
-                                        className="flex items-center justify-center gap-2 relative z-10"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="flex items-center justify-center gap-2 relative z-10 w-full"
                                     >
-                                        <span className="font-extrabold">Add to Cart</span>
-                                        <motion.span
-                                            initial={{ x: 0 }}
-                                            whileHover={{ x: 3 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            →
-                                        </motion.span>
+                                        <span>Add to Cart</span>
                                     </motion.span>
                                 )}
                             </AnimatePresence>
@@ -222,15 +198,9 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                             </div>
 
                             {/* Technical Specs */}
-                            <div className="grid grid-cols-2 gap-4 text-xs">
-                                <div>
-                                    <p className="text-gold/70 uppercase tracking-widest mb-1">Decay Rate</p>
-                                    <p className="text-cream font-mono">{cereal.specs.decayRate}s</p>
-                                </div>
-                                <div>
-                                    <p className="text-gold/70 uppercase tracking-widest mb-1">Sugar</p>
-                                    <p className="text-cream font-mono">{cereal.specs.sugarContent}g</p>
-                                </div>
+                            <div className="flex justify-between items-center bg-white/5 border border-white/5 px-3 py-2 rounded-md mb-2">
+                                <p className="text-gold/70 uppercase tracking-wider text-[10px] font-mono">Decay: <span className="text-cream/90">{cereal.specs.decayRate}s</span></p>
+                                <p className="text-gold/70 uppercase tracking-wider text-[10px] font-mono">Sugar: <span className="text-cream/90">{cereal.specs.sugarContent}g</span></p>
                             </div>
 
                             {/* Flavor Profile Bars */}
