@@ -37,9 +37,18 @@
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4",
+    "vite": "^7.3.2",
     "vitest": "^4.1.2"
   },
   "description": "Satirical cereal tasting experience treating breakfast with the reverence of fine wine appreciation",
-  "license": "MIT"
+  "license": "MIT",
+  "pnpm": {
+    "overrides": {
+      "rollup": ">=4.59.0",
+      "minimatch": ">=9.0.7",
+      "flatted": ">=3.4.2",
+      "picomatch": ">=4.0.4",
+      "vite": ">=7.3.2"
+    }
+  }
 }
