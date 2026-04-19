@@ -80,6 +80,32 @@ const ROUTES = [
     ],
   },
   {
+    path: '/quiz',
+    title: "Soul Quiz | The Sommelier's Spoon",
+    description: 'Discover which vintage cereal matches your soul through our scientifically meaningless but emotionally devastating 7-question personality assessment.',
+    heading: 'The Sommelier\'s Assessment',
+    kicker: 'Cereal soul compatibility quiz',
+    author: 'Breakfast Psychology Division',
+    date: BUILD_DATE,
+    paragraphs: [
+      'The Soul Quiz is a 7-question personality assessment that maps answers to cereal flavor profiles, matching users with their ideal vintage cereal. It demonstrates interactive multi-step form design, trait-based scoring logic, and dramatic reveal animations — all while maintaining the satirical tone of treating breakfast cereal selection as a deeply personal spiritual journey.',
+      'From a technical standpoint, this feature showcases animated page transitions between quiz stages, dynamic scoring algorithms, clipboard sharing integration, and responsive quiz card layouts. The calculating screen uses sequenced message transitions to build anticipation, and the result page includes animated trait bars and personalized copy generation.',
+    ],
+  },
+  {
+    path: '/certificate',
+    title: "Get Certified | The Sommelier's Spoon",
+    description: 'Generate your official Certified Cereal Sommelier certificate, recognized by exactly zero governing bodies worldwide.',
+    heading: 'Certification Ceremony',
+    kicker: 'Official cereal sommelier credentials',
+    author: 'Certification Board (of one)',
+    date: BUILD_DATE,
+    paragraphs: [
+      'The Certificate Generator creates a beautifully rendered, absurdly official-looking certificate declaring the user a Certified Cereal Sommelier. It demonstrates HTML and CSS craftsmanship for document-style layouts, print stylesheet support, deterministic ID generation, and clipboard sharing — all wrapped in the satirical formality of a credential that means absolutely nothing.',
+      'The certificate features ornate corner decorations, a gold foil shimmer effect on the title, a wax seal rendered in pure CSS, and elegant date formatting. Print support ensures the certificate renders cleanly when printed, stripping all site chrome for a clean document output.',
+    ],
+  },
+  {
     path: '/privacy-policy',
     title: "Privacy Policy | The Sommelier's Spoon",
     description: 'Learn how local browser data, preferences, and session-like state are handled transparently within this portfolio cereal tasting application.',

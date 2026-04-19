@@ -14,7 +14,7 @@ const securityHeaders = {
 
 // https://vite.dev/config/
 export default defineConfig({
-  appType: 'mpa',
+  appType: 'spa',
   plugins: [react()],
   preview: {
     headers: securityHeaders,

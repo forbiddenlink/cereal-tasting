@@ -5,6 +5,11 @@ import { Navbar } from './components/Navbar';
 import { FloatingCart } from './components/FloatingCart';
 import { Footer } from './components/Footer';
 import { LoadingSpinner } from './components/LoadingSpinner';
+import { ToastProvider } from './contexts/ToastContext';
+import { ToastContainer } from './components/Toast';
+import { KonamiOverlay } from './components/KonamiOverlay';
+import { useKonamiCode } from './hooks/useKonamiCode';
+import { useCrumbTrail } from './hooks/useCrumbTrail';
 import { CEREALS, type Cereal } from './data/mockData';
 import type { CartItem } from './types/cart';
 import { springs } from './utils/motion';
@@ -15,6 +20,8 @@ const About = lazy(() => import('./pages/About').then((module) => ({ default: mo
 const Contact = lazy(() => import('./pages/Contact').then((module) => ({ default: module.Contact })));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then((module) => ({ default: module.PrivacyPolicy })));
 const NotFound = lazy(() => import('./pages/NotFound').then((module) => ({ default: module.NotFound })));
+const Quiz = lazy(() => import('./pages/Quiz').then((module) => ({ default: module.Quiz })));
+const Certificate = lazy(() => import('./pages/Certificate').then((module) => ({ default: module.Certificate })));
 
 const CART_STORAGE_KEY = 'cereal-cellar-cart-v1';
 const SITE_URL = 'https://cereal-tasting.vercel.app';
@@ -39,6 +46,14 @@ const ROUTE_METADATA: Record<string, { title: string; description: string }> = {
   '/privacy-policy': {
     title: "Privacy Policy | The Sommelier's Spoon",
     description: 'Learn how local browser data, preferences, and session-like state are handled transparently within this portfolio cereal tasting application.',
+  },
+  '/quiz': {
+    title: "Soul Quiz | The Sommelier's Spoon",
+    description: 'Discover which vintage cereal matches your soul through our scientifically meaningless but emotionally devastating 7-question assessment.',
+  },
+  '/certificate': {
+    title: "Get Certified | The Sommelier's Spoon",
+    description: 'Generate your official Certified Cereal Sommelier certificate, recognized by exactly zero governing bodies worldwide.',
   },
 };
 
@@ -184,11 +199,22 @@ const RouteMetadata: React.FC = () => {
   return null;
 };
 
-function App() {
+function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
   const { scrollYProgress } = useScroll();
   const scrollProgress = useSpring(scrollYProgress, { stiffness: 180, damping: 34, mass: 0.3 });
+  const { konamiActivated, resetKonami } = useKonamiCode();
+
+  // Auto-enable crumb trail on desktop
+  const crumbTrail = useCrumbTrail();
+  useEffect(() => {
+    const isDesktop = window.matchMedia('(pointer: fine)').matches;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isDesktop && !prefersReduced) {
+      crumbTrail.enableTrail();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const raw = window.localStorage.getItem(CART_STORAGE_KEY);
     if (!raw) return [];
@@ -299,6 +325,20 @@ function App() {
         subtitle: 'Contact and partnerships',
         keywords: 'contact email press',
         run: () => navigate('/contact/'),
+      },
+      {
+        id: 'go-quiz',
+        label: 'Take the Soul Quiz',
+        subtitle: 'What cereal matches your soul?',
+        keywords: 'quiz personality soul assessment',
+        run: () => navigate('/quiz/'),
+      },
+      {
+        id: 'go-certificate',
+        label: 'Get Certified',
+        subtitle: 'Generate your sommelier certificate',
+        keywords: 'certificate certified sommelier',
+        run: () => navigate('/certificate/'),
       },
     ];
 
@@ -418,6 +458,8 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/quiz" element={<Quiz />} />
+                <Route path="/certificate" element={<Certificate />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </motion.div>
@@ -453,6 +495,8 @@ function App() {
         <span>Command</span>
         <span className="rounded border border-gold/30 px-1.5 py-0.5 text-[10px]">⌘K</span>
       </motion.button>
+      <KonamiOverlay isActive={konamiActivated} onDismiss={resetKonami} />
+      <ToastContainer />
       <AnimatePresence>
         {isCommandPaletteOpen && (
           <>
@@ -552,6 +596,14 @@ function App() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ToastProvider>
+      <AppContent />
+    </ToastProvider>
   );
 }
 
