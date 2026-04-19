@@ -11,8 +11,9 @@ interface NavbarProps {
 const menuItems = [
     { to: '/', label: 'The Cellar', end: true },
     { to: '/pairings/', label: 'Pairings' },
+    { to: '/quiz/', label: 'Soul Quiz' },
+    { to: '/certificate/', label: 'Certify' },
     { to: '/about/', label: 'About' },
-    { to: '/contact/', label: 'Contact' },
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({ cartItemCount, onOpenCart }) => {
