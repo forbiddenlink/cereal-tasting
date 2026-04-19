@@ -5,6 +5,14 @@ export interface FlavorProfile {
     particulate: number; // Artificiality
 }
 
+export interface Review {
+    author: string;
+    rating: number;
+    text: string;
+    date: string;
+    verified: boolean;
+}
+
 export interface Cereal {
     id: string;
     name: string;
@@ -12,6 +20,7 @@ export interface Cereal {
     region: string;
     price: number;
     tastingNotes: string[];
+    reviews: Review[];
     specs: {
         decayRate: number; // Seconds until soggy
         sugarContent: number; // Grams per serving
@@ -30,9 +39,14 @@ export const CEREALS: Cereal[] = [
         region: "The Suggary Isles",
         price: 450.00,
         tastingNotes: [
-            "Aggressive palette abrasion",
-            "Notes of synthetic berry",
-            "Finish of pure varying yellow dye #5"
+            "Opens with aggressive palate abrasion — like a sommelier slapping you awake",
+            "Mid-palate reveals synthetic berry notes last seen in a Dimetapp fever dream",
+            "Finish of pure yellow dye #5, lingering like a regret you'd repeat"
+        ],
+        reviews: [
+            { author: "Rear Admiral B. Crunch (ret.)", rating: 5, text: "Finally, someone treats my life's work with the respect it deserves. I didn't cut the roof of 40 million mouths for nothing.", date: "2024-03-15", verified: true },
+            { author: "Dr. Helena Masticata", rating: 4, text: "Served this at my dental conference. Standing ovation. Three emergency fillings. Worth it.", date: "2024-06-22", verified: true },
+            { author: "Anonymous Buyer", rating: 5, text: "I remortgaged my house for this. My wife left. The crunch stays. 10/10.", date: "2025-01-08", verified: false },
         ],
         specs: {
             decayRate: 45,
@@ -55,9 +69,13 @@ export const CEREALS: Cereal[] = [
         region: "Transylvanian Mills",
         price: 1200.00,
         tastingNotes: [
-            "Deep cocoa dust",
-            "Marshmallow texture reminiscent of styrofoam packing peanuts",
-            "Turns milk into a fine liqueur"
+            "Opens with deep cocoa dust that coats the nasal passages like a Willy Wonka workplace hazard",
+            "Marshmallows with the structural integrity of styrofoam — and honestly, similar flavor notes",
+            "Transforms ordinary milk into a chocolatey liqueur that your dentist would classify as a war crime"
+        ],
+        reviews: [
+            { author: "Count von Count, Esq.", rating: 5, text: "One! One magnificent cereal! Ah ah ah! Two! Two boxes purchased! Ah ah ah! I may have a problem.", date: "2024-10-31", verified: true },
+            { author: "TherapistFinder2024", rating: 4, text: "My client has been aging a box since 1997. I've told her this is 'concerning.' She says I don't understand terroir.", date: "2024-08-14", verified: false },
         ],
         specs: {
             decayRate: 20,
@@ -80,9 +98,14 @@ export const CEREALS: Cereal[] = [
         region: "Toucan Canopy",
         price: 325.00,
         tastingNotes: [
-            "Citrus zest (artificial)",
-            "Bright chemical acidity",
-            "A bouquet of lemon floor polish"
+            "Opens with citrus zest so artificial it triggers a Geneva Convention debate",
+            "Bright chemical acidity — like licking a glow stick, but in a good way",
+            "The finish is pure Froot Loop milk: a flavor scientists have tried and failed to patent since 1963"
+        ],
+        reviews: [
+            { author: "Sam the Toucan (ghostwriter)", rating: 5, text: "Follow my nose? I followed it straight to bankruptcy buying these at auction. No regrets. My beak is tingling.", date: "2024-05-03", verified: true },
+            { author: "Color Theory PhD", rating: 4, text: "Each loop is a different color yet they all taste identical. I wrote my entire dissertation on this paradox. My committee wept.", date: "2024-11-19", verified: true },
+            { author: "BreakfastMaximalist", rating: 5, text: "I eat these dry in business meetings to assert dominance. Three promotions this year.", date: "2025-02-14", verified: false },
         ],
         specs: {
             decayRate: 35,
@@ -105,9 +128,13 @@ export const CEREALS: Cereal[] = [
         region: "Corn Plains of Indiana",
         price: 875.00,
         tastingNotes: [
-            "Aggressive tiger branding",
-            "Industrial sugar crystals with sharp edges",
-            "Hints of motivational phrases"
+            "Opens with aggressive tiger branding energy — the kind that screams 'THEY'RE GRRRREAT' at your soul",
+            "Sugar crystals with industrial-grade edges that double as a palate exfoliant",
+            "The finish carries hints of motivational poster energy and unbridled 80s optimism"
+        ],
+        reviews: [
+            { author: "Tony T. (verified mascot)", rating: 5, text: "They're GRRREAT! (I am contractually obligated to say this, but I also mean it. These are my actual children.)", date: "2024-04-20", verified: true },
+            { author: "Frosted_Flake_Sommelier", rating: 5, text: "I once served these blind to a Michelin-starred chef. He cried. Said it reminded him of before culinary school ruined breakfast.", date: "2024-12-01", verified: true },
         ],
         specs: {
             decayRate: 60,
@@ -130,9 +157,14 @@ export const CEREALS: Cereal[] = [
         region: "Y2K Valley",
         price: 650.00,
         tastingNotes: [
-            "Cannibalistic marketing undertones",
-            "Dangerous levels of cinnamon dust",
-            "Suspiciously addictive swirls"
+            "The mascots eat each other and we're all just... fine with it? Cannibalistic marketing at its finest.",
+            "Cinnamon dust levels that OSHA would classify as a workplace inhalation hazard",
+            "Swirls so addictive the FDA sent a letter. It was delicious. We ate it."
+        ],
+        reviews: [
+            { author: "Dr. Freud (posthumous)", rating: 5, text: "The mascots devour each other alive because they taste so good. I could not have invented a more perfect metaphor for desire.", date: "2024-09-15", verified: false },
+            { author: "CinnamonSurvival2024", rating: 4, text: "I inhaled the cinnamon dust wrong and saw God. She was eating Cinnamon Toast Crunch. 4 stars because of the ER bill.", date: "2024-07-30", verified: true },
+            { author: "Y2KPrepper_Rick", rating: 5, text: "Stockpiled 200 boxes for the millennium bug. Bug never came. Still eating through them. Best mistake of my life.", date: "2025-01-01", verified: true },
         ],
         specs: {
             decayRate: 40,
@@ -155,9 +187,14 @@ export const CEREALS: Cereal[] = [
         region: "Enchanted Marshlands",
         price: 1500.00,
         tastingNotes: [
-            "Magically delicious (legally required phrase)",
-            "Marshmallows with styrofoam texture",
-            "Oat bits that taste like cardboard coins"
+            "'Magically delicious' — a phrase the leprechaun is legally required to say, even at gunpoint",
+            "Marshmallows with the mouthfeel of a pool noodle that went to finishing school",
+            "The oat bits exist only to give parents plausible deniability. 'It has whole grains, Karen.'"
+        ],
+        reviews: [
+            { author: "Lucky (under duress)", rating: 3, text: "They're always after me Lucky Charms. ALWAYS. I haven't slept since 1964. Please. Someone help me.", date: "2024-03-17", verified: true },
+            { author: "MarshmallowPurist_99", rating: 5, text: "I pick out all the oat pieces and feed them to birds. The marshmallows are the art. The oats are the frame. I don't eat frames.", date: "2024-08-05", verified: true },
+            { author: "Prof. Emeritus Breakfast", rating: 5, text: "Served these at my retirement dinner at Harvard. The Dean called it 'inappropriate.' He had three bowls.", date: "2025-03-22", verified: false },
         ],
         specs: {
             decayRate: 25,
@@ -180,9 +217,13 @@ export const CEREALS: Cereal[] = [
         region: "Chocolate Quarries",
         price: 780.00,
         tastingNotes: [
-            "Unhinged bird mascot energy",
-            "Deep chocolate void",
-            "Turns milk into existential crisis"
+            "Sonny's eyes contain a madness that no amount of cocoa can satiate. We relate.",
+            "The chocolate void stares back — and it tastes like a Hershey's factory having a panic attack",
+            "Transforms milk into something your therapist would describe as 'an avoidance mechanism'"
+        ],
+        reviews: [
+            { author: "Sonny the Bird (parole hearing)", rating: 5, text: "I'm CUCKOO for—sorry, my lawyer says I can't say the phrase anymore. Let's just say I have strong feelings.", date: "2024-06-15", verified: true },
+            { author: "MidnightSnacker_Anon", rating: 5, text: "3am, standing in kitchen, eating dry Cocoa Puffs in the dark. My roommate walked in. We don't make eye contact anymore.", date: "2024-11-03", verified: true },
         ],
         specs: {
             decayRate: 15,
@@ -205,9 +246,14 @@ export const CEREALS: Cereal[] = [
         region: "Fruit Shape Factory",
         price: 920.00,
         tastingNotes: [
-            "Not for rabbits (legally mandated)",
-            "Geometrically impossible fruit shapes",
-            "Colors not found in nature"
+            "'Silly rabbit, Trix are for kids' — the most successful age-based discrimination campaign in marketing history",
+            "Each piece is a geometrically impossible fruit shape that Euclid himself would weep over",
+            "Contains colors not found in nature, space, or any known dimension of reality"
+        ],
+        reviews: [
+            { author: "The Rabbit (anonymous)", rating: 1, text: "Decades. DECADES I have tried. They won't let me have even one. This is a hate crime and I will be consulting my attorney.", date: "2024-04-01", verified: false },
+            { author: "90sKid_Forever", rating: 5, text: "They changed the shapes from fruits to spheres in 2006 and I've never emotionally recovered. This vintage brings me peace.", date: "2024-09-20", verified: true },
+            { author: "Art Critic Monthly", rating: 5, text: "Each bowl is a Rothko in miniature — fields of impossible color, suspended in whole milk, provoking questions about what 'fruit' even means.", date: "2025-01-15", verified: true },
         ],
         specs: {
             decayRate: 50,
@@ -230,9 +276,13 @@ export const CEREALS: Cereal[] = [
         region: "Endangered Apiaries",
         price: 560.00,
         tastingNotes: [
-            "Melancholic bee mascot",
-            "Honey notes of corporate desperation",
-            "Whole grain guilt trip"
+            "Buzz the Bee radiates a melancholy that suggests he knows about colony collapse but keeps smiling anyway",
+            "Honey notes wrapped in corporate desperation — like a wellness retreat run by a hedge fund",
+            "The 'whole grain' marketing is a guilt trip so effective your mother would take notes"
+        ],
+        reviews: [
+            { author: "Buzz (exit interview)", rating: 4, text: "I've given my whole life to this brand. My wings are tired. But the honey? The honey is eternal.", date: "2024-05-20", verified: true },
+            { author: "HealthyBreakfastLiar", rating: 5, text: "I tell myself these are healthy because 'honey' and 'whole grain' are in the name. My doctor knows. We both pretend.", date: "2024-10-10", verified: true },
         ],
         specs: {
             decayRate: 70,
@@ -255,9 +305,14 @@ export const CEREALS: Cereal[] = [
         region: "Quarry of Despair",
         price: 2100.00,
         tastingNotes: [
-            "Dental work not included",
-            "Texture of artisanal pebbles",
-            "Requires milk-to-cement ratio calculations"
+            "Dental work not included in the $2,100 price tag — budget another $4,000 for crowns",
+            "Texture of artisanal river pebbles, hand-selected by monks who've taken a vow of crunch",
+            "The milk-to-cement ratio must be calculated to 3 decimal places or structural failure occurs"
+        ],
+        reviews: [
+            { author: "Geologist Monthly", rating: 5, text: "Finally, a cereal that respects the mineral hardness scale. Mohs rating: 6. Somewhere between feldspar and your will to chew.", date: "2024-02-28", verified: true },
+            { author: "DivorceLawyer_Steve", rating: 5, text: "I served Grape-Nuts at my client's divorce proceedings. Her ex cried. She got the house. I got a $2,100 cereal bill. Everyone won.", date: "2024-07-14", verified: true },
+            { author: "Masochist_Breakfast", rating: 5, text: "My jaw is stronger now. I can crack walnuts with my molars. My dentist retired early. Thank you, Grape-Nuts.", date: "2025-03-01", verified: false },
         ],
         specs: {
             decayRate: 999,
@@ -280,9 +335,13 @@ export const CEREALS: Cereal[] = [
         region: "Chocolate Peanut Butter Nexus",
         price: 890.00,
         tastingNotes: [
-            "Legally distinct from actual Reese's",
-            "Breakfast justification for dessert",
-            "Peanut butter dust cloud hazard"
+            "Legally distinct from actual Reese's cups, yet spiritually identical — the breakfast loophole lawyers dreamed of",
+            "Finally legitimized eating candy for breakfast. The Geneva Breakfast Convention was signed for this.",
+            "The peanut butter dust cloud created upon opening constitutes an OSHA-reportable event"
+        ],
+        reviews: [
+            { author: "Nutritionist_In_Exile", rating: 5, text: "My sommelier certification was revoked after I paired this with chocolate milk. Worth every consequence.", date: "2024-04-12", verified: true },
+            { author: "BreakfastPhilosopher", rating: 5, text: "If cereal is acceptable breakfast but candy isn't, and this is both, then either everything is permitted or nothing is. Kierkegaard wept.", date: "2024-11-28", verified: true },
         ],
         specs: {
             decayRate: 38,
@@ -305,9 +364,13 @@ export const CEREALS: Cereal[] = [
         region: "Cookie Jar Underworld",
         price: 725.00,
         tastingNotes: [
-            "Tiny cookies that aren't cookies",
-            "Criminal dog mascot energy",
-            "Breakfast loophole exploitation"
+            "Tiny cookies that aren't technically cookies — the legal gray area that keeps General Mills' lawyers employed",
+            "The burglar dog mascot radiates criminal energy that no rebrand can contain",
+            "The original breakfast loophole: 'Mom, it's CEREAL' (narrator: it was cookies)"
+        ],
+        reviews: [
+            { author: "Cookie Monster (guest review)", rating: 5, text: "Me thought these were cookies. They not cookies. But me eat for breakfast with no judgement? THIS IS BEST DAY OF ME LIFE.", date: "2024-08-22", verified: false },
+            { author: "ParentingFail_2024", rating: 4, text: "Told my kid this counts as breakfast. She told her teacher. Teacher called me. Worth the parent-teacher conference.", date: "2024-12-05", verified: true },
         ],
         specs: {
             decayRate: 42,
@@ -330,9 +393,13 @@ export const CEREALS: Cereal[] = [
         region: "Non-Apple Orchards",
         price: 680.00,
         tastingNotes: [
-            "Contains no actual apple",
-            "Cinnamon masquerading as fruit",
-            "Existential flavor crisis"
+            "Contains no actual apple. The FDA has questions. Marketing has a PowerPoint. Neither side is winning.",
+            "Cinnamon masquerading as fruit — the longest-running identity crisis in breakfast history",
+            "The flavor profile is an existential riddle: What fruit is this? No one knows. No one has ever known."
+        ],
+        reviews: [
+            { author: "Apple Farmers Union", rating: 1, text: "This product has done more damage to apple's reputation than Snow White's stepmother. We are considering legal action. Again.", date: "2024-06-01", verified: true },
+            { author: "PhilosophyMajor_Debt", rating: 5, text: "If Apple Jacks don't taste like apples, do apples taste like Apple Jacks? I've been in this epistemological spiral for 3 days.", date: "2024-10-18", verified: true },
         ],
         specs: {
             decayRate: 55,
@@ -355,9 +422,13 @@ export const CEREALS: Cereal[] = [
         region: "Prehistoric Quarry",
         price: 1050.00,
         tastingNotes: [
-            "Yabba-dabba-delicious trademark infringement",
-            "Turns milk into rainbow sludge",
-            "Fred Flintstone's retirement fund"
+            "Yabba-dabba-delicious — a phrase that skirts trademark law with the confidence of a cartoon caveman",
+            "Transforms milk into a rainbow sludge that doubles as tie-dye if you spill it on your shirt",
+            "Fred Flintstone's retirement fund, now appreciating faster than Bedrock real estate"
+        ],
+        reviews: [
+            { author: "Barney Rubble (under oath)", rating: 5, text: "Fred never shares. 65 million years of friendship and not ONE bowl. I'm taking this to small claims court in Bedrock.", date: "2024-03-30", verified: false },
+            { author: "RainbowMilkChaser", rating: 5, text: "The cereal-milk ratio is irrelevant. I'm here for the psychedelic milk aftermath. It's my meditation.", date: "2024-09-09", verified: true },
         ],
         specs: {
             decayRate: 30,
@@ -380,9 +451,13 @@ export const CEREALS: Cereal[] = [
         region: "Spherical Corn Fields",
         price: 595.00,
         tastingNotes: [
-            "Geometrically perfect corn spheres",
-            "Pops that don't actually pop",
-            "Suspiciously uniform golden coating"
+            "Each sphere is geometrically perfect — nature creates nothing this round. This is hubris, and it's delicious.",
+            "Called 'Pops' despite never popping. The false advertising is part of the charm. Like calling a Chihuahua a guard dog.",
+            "The golden coating is suspiciously uniform, as if each piece was individually gilded by tiny factory elves"
+        ],
+        reviews: [
+            { author: "Conspiracy_Carl", rating: 5, text: "Why are they called POPS if they don't POP? What are they hiding? I've started a podcast about this. 47 episodes so far.", date: "2024-05-17", verified: true },
+            { author: "Sphere Enthusiast Monthly", rating: 4, text: "As a professional sphere evaluator, I give these a 9.3/10 on roundness. Deduction for occasional ovoid specimens.", date: "2024-12-20", verified: true },
         ],
         specs: {
             decayRate: 48,

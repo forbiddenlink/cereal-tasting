@@ -224,6 +224,29 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                                 ))}
                             </div>
 
+                            {/* Customer Reviews */}
+                            {cereal.reviews && cereal.reviews.length > 0 && (
+                                <div>
+                                    <p className="text-xs text-gold/70 uppercase tracking-widest mb-3">Collector Reviews</p>
+                                    <div className="space-y-3">
+                                        {cereal.reviews.slice(0, 2).map((review, i) => (
+                                            <div key={i} className="bg-white/[0.03] border border-white/5 rounded-lg p-3">
+                                                <div className="flex justify-between items-start mb-1.5">
+                                                    <span className="text-[10px] font-mono text-gold/60">
+                                                        {review.author}
+                                                        {review.verified && <span className="text-slime/60 ml-1">✓</span>}
+                                                    </span>
+                                                    <span className="text-[10px] text-gold/40">
+                                                        {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+                                                    </span>
+                                                </div>
+                                                <p className="text-xs text-cream/60 italic leading-relaxed">"{review.text}"</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
                             {/* Rating Component */}
                             <div className="pt-4">
                                 <p className="text-xs text-gold/70 uppercase tracking-widest mb-3 text-center">Rate This Vintage</p>
