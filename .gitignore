@@ -37,3 +37,7 @@ out/
 # Vercel
 .vercel
 .env*
+
+# Claude / Playwright MCP caches
+.claude/tsc-cache/
+.playwright-mcp/
