@@ -48,7 +48,9 @@
       "minimatch": ">=9.0.7",
       "flatted": ">=3.4.2",
       "picomatch": ">=4.0.4",
-      "vite": ">=7.3.2"
+      "vite": ">=7.3.2",
+      "protobufjs": "^7.6.1",
+      "minimatch": ">=10.2.5"
     }
   }
 }
