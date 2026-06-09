@@ -37,7 +37,7 @@
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.60.1",
-    "vite": "^7.3.2",
+    "vite": "^8.0.16",
     "vitest": "^4.1.8"
   },
   "description": "Satirical cereal tasting experience treating breakfast with the reverence of fine wine appreciation",
