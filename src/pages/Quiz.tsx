@@ -1,7 +1,11 @@
-import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useMemo, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useSearchParams } from 'react-router-dom';
 import { CEREALS } from '../data/mockData';
 import { springs } from '../utils/motion';
+import { useToast } from '../contexts/ToastContext';
+import { CEREAL_TOASTS } from '../components/Toast';
+import { matchCereal, buildQuizShareUrl, type SoulTraits } from '../utils/soulMatch';
 
 interface TraitScores {
     sweetness: number;
@@ -94,35 +98,6 @@ const CALCULATING_MESSAGES = [
     "The spoon is trembling...",
 ];
 
-function matchCereal(traits: TraitScores) {
-    const maxVal = Math.max(traits.sweetness, traits.crunch, traits.nostalgia, traits.chaos, 1);
-    const norm = {
-        sweetness: (traits.sweetness / maxVal) * 100,
-        crunch: (traits.crunch / maxVal) * 100,
-        nostalgia: (traits.nostalgia / maxVal) * 100,
-        chaos: (traits.chaos / maxVal) * 100,
-    };
-
-    let bestCereal = CEREALS[0];
-    let bestDist = Infinity;
-
-    for (const cereal of CEREALS) {
-        const f = cereal.flavor;
-        const dist = Math.sqrt(
-            (f.sweetness - norm.sweetness) ** 2 +
-            (f.crunch - norm.crunch) ** 2 +
-            (f.nostalgia - norm.nostalgia) ** 2 +
-            (f.particulate - norm.chaos) ** 2
-        );
-        if (dist < bestDist) {
-            bestDist = dist;
-            bestCereal = cereal;
-        }
-    }
-
-    return bestCereal;
-}
-
 function getSommelierNote(traits: TraitScores) {
     const sorted = Object.entries(traits).sort(([, a], [, b]) => b - a);
     const dominant = sorted[0][0] as keyof TraitScores;
@@ -145,7 +120,7 @@ function getSommelierNote(traits: TraitScores) {
 
     const notes: Record<string, string> = {
         'sweetness-nostalgia': "You chase comfort through sugar, and honestly? It works. Your breakfast bowl is a time machine that runs on glucose.",
-        'sweetness-crunch': "You demand both pleasure and structure. Every bite must be both soft and sharp. You contain multitudes.",
+        'sweetness-crunch': "You demand pleasure and structural integrity in the same bite. Your jaw has standards.",
         'sweetness-chaos': "You'd put candy in a cereal bowl and call it innovation. The world isn't ready for you. Neither is your dentist.",
         'crunch-nostalgia': "You miss the old days, but you refuse to compromise on texture. Your jaw is both strong and wistful.",
         'crunch-sweetness': "You want the crunch, but you won't suffer for it. Strategic sugar deployment. You'd be great in logistics.",
@@ -159,21 +134,27 @@ function getSommelierNote(traits: TraitScores) {
     };
 
     const key = `${dominant}-${secondary}`;
+    const total = traits.sweetness + traits.crunch + traits.nostalgia + traits.chaos;
     return {
         headline: headlines[key] ?? 'The Cereal Enigma',
         body: notes[key] ?? "The algorithm has no category for you. You have transcended cereal personality types. Jacques is both concerned and impressed.",
-        sommelierNote: `Based on our proprietary 7-question assessment, your breakfast soul resonates at a frequency of ${traits.sweetness + traits.crunch + traits.nostalgia + traits.chaos} Cereal Hertz. This is ${traits.chaos > 8 ? 'alarming' : 'within acceptable parameters'}.`,
+        sommelierNote: `Your soul resonates at ${total} crunch cycles per spoon. Chaos above 8 triggers a wellness check from the Bureau of Breakfast.`,
     };
 }
 
 type Stage = 'intro' | 'quiz' | 'calculating' | 'result';
 
 export function Quiz() {
+    const { addToast } = useToast();
+    const shouldReduceMotion = useReducedMotion();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [stage, setStage] = useState<Stage>('intro');
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [answers, setAnswers] = useState<number[]>([]);
     const [calcMsgIndex, setCalcMsgIndex] = useState(0);
     const [copied, setCopied] = useState(false);
+    const toastedResultRef = useRef(false);
+    const [sharedResultId, setSharedResultId] = useState<string | null>(null);
 
     const traits = useMemo<TraitScores>(() => {
         const sum: TraitScores = { sweetness: 0, crunch: 0, nostalgia: 0, chaos: 0 };
@@ -189,8 +170,31 @@ export function Quiz() {
         return sum;
     }, [answers]);
 
-    const resultCereal = useMemo(() => matchCereal(traits), [traits]);
+    const matchedCereal = useMemo(
+        () => matchCereal(traits as SoulTraits, CEREALS),
+        [traits],
+    );
+    const resultCereal = useMemo(() => {
+        if (sharedResultId) {
+            return CEREALS.find((c) => c.id === sharedResultId) ?? matchedCereal;
+        }
+        return matchedCereal;
+    }, [sharedResultId, matchedCereal]);
     const note = useMemo(() => getSommelierNote(traits), [traits]);
+
+    useEffect(() => {
+        const resultId = searchParams.get('result');
+        if (!resultId) return;
+        if (!CEREALS.some((c) => c.id === resultId)) return;
+        setSharedResultId(resultId);
+        setStage('result');
+    }, [searchParams]);
+
+    useEffect(() => {
+        if (stage !== 'result' || toastedResultRef.current) return;
+        toastedResultRef.current = true;
+        addToast({ type: 'achievement', message: CEREAL_TOASTS.quizComplete(resultCereal.name) });
+    }, [stage, resultCereal.name, addToast]);
 
     const handleAnswer = (answerIdx: number) => {
         const next = [...answers, answerIdx];
@@ -201,6 +205,10 @@ export function Quiz() {
         } else {
             setStage('calculating');
             let msgIdx = 0;
+            if (shouldReduceMotion) {
+                setStage('result');
+                return;
+            }
             const interval = setInterval(() => {
                 msgIdx++;
                 if (msgIdx >= CALCULATING_MESSAGES.length) {
@@ -213,20 +221,43 @@ export function Quiz() {
         }
     };
 
+    useEffect(() => {
+        if (stage !== 'result' || sharedResultId) return;
+        if (searchParams.get('result') === matchedCereal.id) return;
+        const next = new URLSearchParams(searchParams);
+        next.set('result', matchedCereal.id);
+        setSearchParams(next, { replace: true });
+    }, [stage, matchedCereal.id, sharedResultId, searchParams, setSearchParams]);
+
     const reset = () => {
         setStage('intro');
         setCurrentQuestion(0);
         setAnswers([]);
         setCalcMsgIndex(0);
         setCopied(false);
+        setSharedResultId(null);
+        toastedResultRef.current = false;
+        const next = new URLSearchParams(searchParams);
+        next.delete('result');
+        setSearchParams(next, { replace: true });
     };
 
-    const share = () => {
-        navigator.clipboard.writeText(
-            `I am a ${resultCereal.name} person. The spoon has spoken. 🥄\n\nTake the quiz: ${window.location.href}`
-        );
-        setCopied(true);
-        setTimeout(() => setCopied(false), 3000);
+    const share = async () => {
+        const shareUrl = buildQuizShareUrl(window.location.origin, resultCereal.id);
+        const text = `I am a ${resultCereal.name} person. The spoon has spoken. 🥄\n\nTake the quiz: ${shareUrl}`;
+        try {
+            if (navigator.share) {
+                await navigator.share({ title: "The Sommelier's Spoon — Soul Quiz", text, url: shareUrl });
+                addToast({ type: 'success', message: CEREAL_TOASTS.quizShared(resultCereal.name) });
+                return;
+            }
+            await navigator.clipboard.writeText(text);
+            setCopied(true);
+            addToast({ type: 'success', message: CEREAL_TOASTS.quizShared(resultCereal.name) });
+            setTimeout(() => setCopied(false), 3000);
+        } catch {
+            window.prompt('Copy your soul diagnosis:', text);
+        }
     };
 
     return (
@@ -264,7 +295,7 @@ export function Quiz() {
                                     whileTap={{ scale: 0.95 }}
                                     className="px-8 py-4 rounded-xl bg-gradient-to-br from-gold via-gold to-gold-dim text-void font-heading font-bold uppercase tracking-wider text-sm shadow-[0_4px_20px_rgba(212,175,55,0.3)]"
                                 >
-                                    Begin the Assessment
+                                    Submit to the Spoon
                                 </motion.button>
 
                                 <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-10" />
@@ -337,14 +368,16 @@ export function Quiz() {
                             key="calc"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            exit={{ opacity: 0, scale: 1.1 }}
+                            exit={{ opacity: 0, scale: shouldReduceMotion ? 1 : 1.1 }}
                             className="text-center py-20"
                         >
-                            <motion.div
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                                className="w-20 h-20 border-2 border-gold/30 border-t-gold rounded-full mx-auto mb-8"
-                            />
+                            {!shouldReduceMotion && (
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                                    className="w-20 h-20 border-2 border-gold/30 border-t-gold rounded-full mx-auto mb-8"
+                                />
+                            )}
                             <AnimatePresence mode="wait">
                                 <motion.p
                                     key={calcMsgIndex}
@@ -400,12 +433,17 @@ export function Quiz() {
 
                                 <div className="w-full h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent mb-8" />
 
-                                <h4 className="text-2xl font-heading text-cream mb-3">{note.headline}</h4>
+                                <h4 className="text-2xl font-heading text-cream mb-3">
+                                    {answers.length === 0 ? 'A Shared Diagnosis' : note.headline}
+                                </h4>
                                 <p className="text-cream/70 text-sm leading-relaxed max-w-lg mx-auto mb-8">
-                                    {note.body}
+                                    {answers.length === 0
+                                        ? `Someone sent you this bowl on purpose. ${resultCereal.name} has been declared a soul match. Take the assessment yourself if you want Jacques to roast you personally.`
+                                        : note.body}
                                 </p>
 
                                 {/* Trait bars */}
+                                {answers.length > 0 && (
                                 <div className="grid grid-cols-2 gap-4 mb-8 max-w-md mx-auto text-left">
                                     {Object.entries(traits).map(([key, value]) => (
                                         <div key={key}>
@@ -424,8 +462,10 @@ export function Quiz() {
                                         </div>
                                     ))}
                                 </div>
+                                )}
 
                                 {/* Sommelier's note */}
+                                {answers.length > 0 && (
                                 <div className="bg-white/[0.03] border border-gold/10 rounded-xl p-5 mb-8 text-left">
                                     <p className="text-[10px] font-mono text-gold/50 uppercase tracking-widest mb-2">
                                         Sommelier's Note
@@ -437,6 +477,7 @@ export function Quiz() {
                                         — Jacques Flakémont III
                                     </p>
                                 </div>
+                                )}
 
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                     <motion.button

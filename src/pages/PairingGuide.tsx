@@ -5,8 +5,11 @@ import { CEREALS, type Cereal } from '../data/mockData';
 import { MILKS, type Milk } from '../data/milks';
 import { MilkSelector } from '../components/MilkSelector';
 import { PairingCard } from '../components/PairingCard';
+import { useToast } from '../contexts/ToastContext';
+import { CEREAL_TOASTS } from '../components/Toast';
 
 export const PairingGuide: React.FC = () => {
+    const { addToast } = useToast();
     const [searchParams, setSearchParams] = useSearchParams();
     const [copied, setCopied] = React.useState(false);
     const copyTimeoutRef = React.useRef<number | null>(null);
@@ -35,6 +38,7 @@ export const PairingGuide: React.FC = () => {
         next.set('cereal', selectedCereal.id);
         next.set('milk', milk.id);
         setSearchParams(next, { replace: true });
+        addToast({ type: 'success', message: CEREAL_TOASTS.pairingFound() });
     };
 
     const copyShareLink = async () => {
@@ -54,6 +58,10 @@ export const PairingGuide: React.FC = () => {
             return;
         }
         setCopied(true);
+        addToast({
+            type: 'info',
+            message: CEREAL_TOASTS.pairingCopied(selectedCereal.name, selectedMilk?.name),
+        });
         if (copyTimeoutRef.current !== null) {
             window.clearTimeout(copyTimeoutRef.current);
         }

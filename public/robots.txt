@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://forbiddenlink.github.io/cereal-tasting/sitemap.xml
+Sitemap: https://cereal-tasting.vercel.app/sitemap.xml

@@ -360,26 +360,40 @@ img {
   20%, 40%, 60%, 80% { transform: translateX(4px); }
 }
 
-/* Print styles for certificate */
+/* Print styles for certificate + tasting menu */
 @media print {
   body {
     background: white !important;
     color: black !important;
   }
 
-  nav, footer {
-    display: none !important;
+  body * {
+    visibility: hidden !important;
   }
 
-  .certificate-printable {
+  .certificate-printable,
+  .certificate-printable *,
+  .flight-menu-printable,
+  .flight-menu-printable * {
+    visibility: visible !important;
+  }
+
+  .certificate-printable,
+  .flight-menu-printable {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
     box-shadow: none !important;
     border-radius: 0 !important;
     margin: 0 !important;
     max-width: 100% !important;
   }
 
-  main {
-    padding: 0 !important;
+  nav,
+  footer,
+  .print\:hidden {
+    display: none !important;
   }
 }
 

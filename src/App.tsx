@@ -1,18 +1,22 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
+import { lazy, Suspense, useEffect, useMemo, useState, useCallback, useRef } from 'react';
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { FloatingCart } from './components/FloatingCart';
 import { Footer } from './components/Footer';
 import { LoadingSpinner } from './components/LoadingSpinner';
-import { ToastProvider } from './contexts/ToastContext';
-import { ToastContainer } from './components/Toast';
+import { ToastProvider, useToast } from './contexts/ToastContext';
+import { ToastContainer, CEREAL_TOASTS } from './components/Toast';
 import { KonamiOverlay } from './components/KonamiOverlay';
+import { MilkPourOverlay } from './components/MilkPourOverlay';
+import { FlightMenu } from './components/FlightMenu';
 import { useKonamiCode } from './hooks/useKonamiCode';
 import { useCrumbTrail } from './hooks/useCrumbTrail';
+import { useFocusTrap } from './hooks/useFocusTrap';
 import { CEREALS, type Cereal } from './data/mockData';
 import type { CartItem } from './types/cart';
 import { springs } from './utils/motion';
+import { flightName } from './data/jacques';
 
 const Home = lazy(() => import('./pages/Home').then((module) => ({ default: module.Home })));
 const PairingGuide = lazy(() => import('./pages/PairingGuide').then((module) => ({ default: module.PairingGuide })));
@@ -74,6 +78,10 @@ interface CommandAction {
 }
 
 const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, itemCount, total, onCancel, onConfirm }) => {
+  const namedFlight = flightName(itemCount, total);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(isOpen, dialogRef);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -96,16 +104,26 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, itemCount, total,
             exit={{ opacity: 0, y: 10, filter: 'blur(3px)' }}
             transition={springs.smooth}
           >
-            <div className="w-full max-w-md rounded-2xl border border-gold/20 bg-gradient-to-b from-merlot-dark to-void p-6 shadow-2xl">
-              <h2 id="checkout-modal-title" className="text-2xl font-heading text-gold mb-3">
-                Confirm Checkout
+            <div
+              ref={dialogRef}
+              tabIndex={-1}
+              className="w-full max-w-md rounded-2xl border border-gold/20 bg-gradient-to-b from-merlot-dark to-void p-6 shadow-2xl outline-none"
+            >
+              <p className="text-[10px] font-mono text-gold/50 uppercase tracking-[0.25em] mb-2">
+                Closing Ceremony
+              </p>
+              <h2 id="checkout-modal-title" className="text-2xl font-heading text-gold mb-2">
+                Dismiss {namedFlight}?
               </h2>
               <p className="text-cream/80 text-sm leading-relaxed mb-5">
-                This portfolio checkout will clear your flight list. No real purchase is processed.
+                Jacques will ring a tiny spoon like a dinner bell. No money moves. Your dignity is optional.
               </p>
-              <div className="space-y-2 text-sm font-mono mb-6">
-                <p className="text-gold/80">Items: {itemCount}</p>
-                <p className="text-cream">Total: ${total.toFixed(2)}</p>
+              <div className="rounded-xl border border-gold/15 bg-white/[0.03] p-4 space-y-2 text-sm font-mono mb-6">
+                <p className="text-gold/80">Bowls in flight: {itemCount}</p>
+                <p className="text-cream">Emotional ledger: ${total.toFixed(2)}</p>
+                <p className="text-[10px] text-cream/40 uppercase tracking-wider pt-1">
+                  Recognized by 0 payment processors
+                </p>
               </div>
               <div className="flex gap-3 justify-end">
                 <button
@@ -113,14 +131,14 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, itemCount, total,
                   onClick={onCancel}
                   className="px-4 py-2 rounded-lg border border-gold/30 text-cream hover:border-gold/60 transition-colors"
                 >
-                  Cancel
+                  Keep Tasting
                 </button>
                 <button
                   type="button"
                   onClick={onConfirm}
                   className="px-4 py-2 rounded-lg bg-gradient-to-br from-gold via-gold to-gold-dim text-void font-heading font-bold"
                 >
-                  Clear My Flight
+                  Ring the Spoon
                 </button>
               </div>
             </div>
@@ -190,9 +208,15 @@ const RouteMetadata: React.FC = () => {
     }
 
     const canonical = document.querySelector('link[rel="canonical"]');
+    const suffix = normalizedPath === '/' ? '/' : `${normalizedPath}/`;
+    const absoluteUrl = `${SITE_URL}${suffix}`;
     if (canonical) {
-      const suffix = normalizedPath === '/' ? '/' : `${normalizedPath}/`;
-      canonical.setAttribute('href', `${SITE_URL}${suffix}`);
+      canonical.setAttribute('href', absoluteUrl);
+    }
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      ogUrl.setAttribute('content', absoluteUrl);
     }
   }, [pathname]);
 
@@ -205,6 +229,9 @@ function AppContent() {
   const { scrollYProgress } = useScroll();
   const scrollProgress = useSpring(scrollYProgress, { stiffness: 180, damping: 34, mass: 0.3 });
   const { konamiActivated, resetKonami } = useKonamiCode();
+  const { addToast } = useToast();
+  const shouldReduceMotion = useReducedMotion();
+  const commandDialogRef = useRef<HTMLDivElement>(null);
 
   // Auto-enable crumb trail on desktop
   const crumbTrail = useCrumbTrail();
@@ -231,10 +258,18 @@ function AppContent() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState('');
   const [commandCursor, setCommandCursor] = useState(0);
+  const [pourActive, setPourActive] = useState(false);
+  const [pourName, setPourName] = useState<string | undefined>();
+  const [isFlightMenuOpen, setIsFlightMenuOpen] = useState(false);
 
   useEffect(() => {
     window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
   }, [cartItems]);
+
+  const clearPour = useCallback(() => {
+    setPourActive(false);
+    setPourName(undefined);
+  }, []);
 
   const addToCart = (cereal: Cereal) => {
     setCartItems((prev) => {
@@ -248,25 +283,43 @@ function AppContent() {
       }
       return [...prev, { cereal, quantity: 1 }];
     });
+
+    setPourName(cereal.name);
+    setPourActive(true);
+
+    const nextCount = itemCount + 1;
+    if (nextCount === 3 || nextCount === 5) {
+      addToast({ type: 'achievement', message: CEREAL_TOASTS.milestone(nextCount) });
+    } else {
+      addToast({ type: 'success', message: CEREAL_TOASTS.addedToCart(cereal.name) });
+    }
   };
 
-  const removeFromCart = (cerealId: string) => {
+  const removeFromCart = (cerealId: string, options?: { silent?: boolean }) => {
+    const removed = cartItems.find((item) => item.cereal.id === cerealId);
     setCartItems((prev) => prev.filter((item) => item.cereal.id !== cerealId));
+    if (removed && !options?.silent) {
+      addToast({ type: 'info', message: CEREAL_TOASTS.removedFromCart(removed.cereal.name) });
+    }
   };
 
-  const updateCartQuantity = (cerealId: string, quantity: number) => {
+  const updateCartQuantity = (cerealId: string, quantity: number, options?: { silent?: boolean }) => {
     if (quantity <= 0) {
-      removeFromCart(cerealId);
+      removeFromCart(cerealId, options);
       return;
     }
 
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.cereal.id === cerealId
-          ? { ...item, quantity }
-          : item
-      )
-    );
+    setCartItems((prev) => {
+      const existing = prev.find((item) => item.cereal.id === cerealId);
+      if (existing) {
+        return prev.map((item) =>
+          item.cereal.id === cerealId ? { ...item, quantity } : item
+        );
+      }
+      const cereal = CEREALS.find((c) => c.id === cerealId);
+      if (!cereal) return prev;
+      return [...prev, { cereal, quantity }];
+    });
   };
 
   const itemCount = useMemo(
@@ -279,9 +332,11 @@ function AppContent() {
   );
 
   const handleConfirmCheckout = () => {
+    const cleared = itemCount;
     setCartItems([]);
     setIsCartOpen(false);
     setIsCheckoutModalOpen(false);
+    addToast({ type: 'achievement', message: CEREAL_TOASTS.checkoutCleared(cleared) });
   };
 
   const topNostalgiaCereals = useMemo(
@@ -418,6 +473,8 @@ function AppContent() {
     };
   }, [isCommandPaletteOpen]);
 
+  useFocusTrap(isCommandPaletteOpen, commandDialogRef);
+
   const executeCommand = (action: CommandAction) => {
     action.run();
     closeCommandPalette();
@@ -430,13 +487,6 @@ function AppContent() {
         className="fixed top-0 left-0 right-0 h-[2px] z-[90] bg-gradient-to-r from-slime via-gold to-berry origin-left"
         style={{ scaleX: scrollProgress }}
       />
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[80] focus:px-4 focus:py-2 focus:rounded-md focus:bg-gold focus:text-void focus:font-bold"
-      >
-        Skip to main content
-      </a>
-
       <ScrollToTop />
       <RouteMetadata />
       <Navbar cartItemCount={itemCount} onOpenCart={() => setIsCartOpen(true)} />
@@ -446,10 +496,10 @@ function AppContent() {
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
-              initial={{ opacity: 0, y: 18, filter: 'blur(6px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -12, filter: 'blur(5px)' }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 18, filter: 'blur(6px)' }}
+              animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -12, filter: 'blur(5px)' }}
+              transition={{ duration: shouldReduceMotion ? 0.15 : 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
               <Routes location={location}>
                 <Route path="/" element={<Home onAddToCart={addToCart} />} />
@@ -474,8 +524,18 @@ function AppContent() {
         onRemove={removeFromCart}
         onUpdateQuantity={updateCartQuantity}
         onCheckout={() => setIsCheckoutModalOpen(true)}
+        onOpenMenu={() => {
+          setIsCartOpen(false);
+          setIsFlightMenuOpen(true);
+        }}
         isOpen={isCartOpen}
         onOpenChange={setIsCartOpen}
+      />
+      <FlightMenu
+        isOpen={isFlightMenuOpen}
+        items={cartItems}
+        onClose={() => setIsFlightMenuOpen(false)}
+        onPrinted={() => addToast({ type: 'info', message: CEREAL_TOASTS.menuPrinted() })}
       />
       <CheckoutModal
         isOpen={isCheckoutModalOpen}
@@ -484,15 +544,17 @@ function AppContent() {
         onCancel={() => setIsCheckoutModalOpen(false)}
         onConfirm={handleConfirmCheckout}
       />
+      <MilkPourOverlay active={pourActive} cerealName={pourName} onComplete={clearPour} />
       <motion.button
         type="button"
         onClick={openCommandPalette}
         whileHover={{ y: -2, scale: 1.03 }}
         whileTap={{ scale: 0.98 }}
-        className="hidden md:flex fixed bottom-8 left-8 z-[72] items-center gap-2 rounded-lg border border-gold/25 bg-merlot-dark/80 backdrop-blur-md px-3 py-2 text-xs font-mono uppercase tracking-wider text-gold/75 hover:border-gold/55 hover:text-gold transition-colors"
+        className="flex fixed bottom-8 left-8 z-[72] items-center gap-2 rounded-lg border border-gold/25 bg-merlot-dark/80 backdrop-blur-md px-3 py-2 text-xs font-mono uppercase tracking-wider text-gold/75 hover:border-gold/55 hover:text-gold transition-colors"
         aria-label="Open command palette"
       >
-        <span>Command</span>
+        <span className="hidden sm:inline">Command</span>
+        <span className="sm:hidden">⌘</span>
         <span className="rounded border border-gold/30 px-1.5 py-0.5 text-[10px]">⌘K</span>
       </motion.button>
       <KonamiOverlay isActive={konamiActivated} onDismiss={resetKonami} />
@@ -516,7 +578,9 @@ function AppContent() {
               transition={springs.smooth}
             >
               <div
-                className="w-full max-w-2xl rounded-2xl border border-gold/25 bg-gradient-to-b from-merlot-dark/95 to-void/95 shadow-2xl overflow-hidden"
+                ref={commandDialogRef}
+                tabIndex={-1}
+                className="w-full max-w-2xl rounded-2xl border border-gold/25 bg-gradient-to-b from-merlot-dark/95 to-void/95 shadow-2xl overflow-hidden outline-none"
                 role="dialog"
                 aria-modal="true"
                 aria-label="Command palette"

@@ -41,3 +41,4 @@ out/
 # Claude / Playwright MCP caches
 .claude/tsc-cache/
 .playwright-mcp/
+.audit-report.md

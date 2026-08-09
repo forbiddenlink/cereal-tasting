@@ -1,5 +1,8 @@
 import { useState, useRef, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useToast } from '../contexts/ToastContext';
+import { CEREAL_TOASTS } from '../components/Toast';
+import { downloadCertificatePng } from '../utils/certificatePng';
 
 const GENERATION_MESSAGES = [
     "Verifying credentials...",
@@ -42,16 +45,23 @@ function formatDate(): string {
 type Stage = 'input' | 'generating' | 'display';
 
 export function Certificate() {
+    const { addToast } = useToast();
+    const shouldReduceMotion = useReducedMotion();
     const [stage, setStage] = useState<Stage>('input');
     const [name, setName] = useState('');
     const [generatingMsg, setGeneratingMsg] = useState(0);
     const [copied, setCopied] = useState(false);
+    const [downloading, setDownloading] = useState(false);
     const certRef = useRef<HTMLDivElement>(null);
 
     const certNumber = useMemo(() => hashName(name), [name]);
 
     const handleGenerate = () => {
         if (!name.trim()) return;
+        if (shouldReduceMotion) {
+            setStage('display');
+            return;
+        }
         setStage('generating');
         let idx = 0;
         const interval = setInterval(() => {
@@ -65,16 +75,39 @@ export function Certificate() {
         }, 900);
     };
 
-    const handleShare = () => {
-        navigator.clipboard.writeText(
-            `I am now a Certified Cereal Sommelier (Certificate #${certNumber}). Please address me accordingly. 🥄`
-        );
-        setCopied(true);
-        setTimeout(() => setCopied(false), 3000);
+    const handleShare = async () => {
+        const text = `I am now a Certified Cereal Sommelier (Certificate #${certNumber}). Please address me accordingly. 🥄`;
+        try {
+            await navigator.clipboard.writeText(text);
+            setCopied(true);
+            addToast({ type: 'achievement', message: CEREAL_TOASTS.certShared(certNumber) });
+            setTimeout(() => setCopied(false), 3000);
+        } catch {
+            window.prompt('Copy your certificate brag:', text);
+        }
     };
 
     const handlePrint = () => {
-        window.print();
+        addToast({ type: 'info', message: CEREAL_TOASTS.certPrinted() });
+        window.setTimeout(() => window.print(), 120);
+    };
+
+    const handleDownloadPng = async () => {
+        if (!name.trim() || downloading) return;
+        setDownloading(true);
+        try {
+            await downloadCertificatePng({
+                name: name.trim(),
+                certNumber,
+                dateLabel: formatDate(),
+                year: new Date().getFullYear(),
+            });
+            addToast({ type: 'achievement', message: CEREAL_TOASTS.certDownloaded() });
+        } catch {
+            addToast({ type: 'warning', message: 'PNG export failed. Try Print instead — Jacques improvises.' });
+        } finally {
+            setDownloading(false);
+        }
     };
 
     return (
@@ -111,7 +144,7 @@ export function Certificate() {
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
                                         onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
-                                        placeholder="Enter your name"
+                                        placeholder="e.g. Jacques Flakémont III (aspiring)"
                                         className="w-full bg-white/[0.03] border-2 border-gold/30 rounded-xl px-5 py-4 text-cream text-center font-heading text-xl placeholder:text-cream/20 focus:outline-none focus:border-gold/60 transition-colors"
                                         autoFocus
                                     />
@@ -125,7 +158,7 @@ export function Certificate() {
                                     whileTap={name.trim() ? { scale: 0.95 } : {}}
                                     className="px-8 py-4 rounded-xl bg-gradient-to-br from-gold via-gold to-gold-dim text-void font-heading font-bold uppercase tracking-wider text-sm shadow-[0_4px_20px_rgba(212,175,55,0.3)] disabled:opacity-40 disabled:cursor-not-allowed"
                                 >
-                                    Begin Certification
+                                    Emboss My Name
                                 </motion.button>
 
                                 <p className="text-cream/25 text-[10px] font-mono mt-6">
@@ -145,6 +178,7 @@ export function Certificate() {
                             className="text-center py-20"
                         >
                             {/* Wax seal spinner */}
+                            {!shouldReduceMotion && (
                             <motion.div
                                 animate={{ rotate: 360 }}
                                 transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
@@ -152,6 +186,7 @@ export function Certificate() {
                             >
                                 <span className="text-3xl">🔏</span>
                             </motion.div>
+                            )}
                             <AnimatePresence mode="wait">
                                 <motion.p
                                     key={generatingMsg}
@@ -211,7 +246,7 @@ export function Certificate() {
                                             backgroundSize: '200% auto',
                                             WebkitBackgroundClip: 'text',
                                             WebkitTextFillColor: 'transparent',
-                                            animation: 'shimmer 3s linear infinite',
+                                            animation: shouldReduceMotion ? undefined : 'shimmer 3s linear infinite',
                                         }}
                                     >
                                         The Sommelier's Spoon
@@ -287,10 +322,20 @@ export function Certificate() {
                             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 print:hidden">
                                 <motion.button
                                     type="button"
+                                    onClick={handleDownloadPng}
+                                    disabled={downloading}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="px-6 py-3 rounded-xl bg-gradient-to-br from-gold via-gold to-gold-dim text-void font-heading font-bold uppercase tracking-wider text-sm disabled:opacity-50"
+                                >
+                                    {downloading ? 'Embossing…' : 'Download PNG'}
+                                </motion.button>
+                                <motion.button
+                                    type="button"
                                     onClick={handlePrint}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="px-6 py-3 rounded-xl bg-gradient-to-br from-gold via-gold to-gold-dim text-void font-heading font-bold uppercase tracking-wider text-sm"
+                                    className="px-6 py-3 rounded-xl border border-gold/30 text-gold font-heading font-bold uppercase tracking-wider text-sm hover:border-gold/60"
                                 >
                                     Print Certificate
                                 </motion.button>

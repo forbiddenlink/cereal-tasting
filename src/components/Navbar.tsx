@@ -14,6 +14,7 @@ const menuItems = [
     { to: '/quiz/', label: 'Soul Quiz' },
     { to: '/certificate/', label: 'Certify' },
     { to: '/about/', label: 'About' },
+    { to: '/contact/', label: 'Contact' },
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({ cartItemCount, onOpenCart }) => {

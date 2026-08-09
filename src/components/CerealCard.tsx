@@ -123,19 +123,27 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                             {cereal.vintage}
                         </span>
                     </h3>
-                    <p className="text-[10px] font-mono text-gold/40 uppercase tracking-wider mb-4">{cereal.region}</p>
+                    <p className="text-[10px] font-mono text-gold/40 uppercase tracking-wider mb-3">{cereal.region}</p>
+
+                    <p className="text-xs text-cream/70 italic leading-relaxed mb-5 line-clamp-2 px-1">
+                        “{cereal.tastingNotes[0]}”
+                    </p>
 
                     <div className="flex justify-center gap-2 mb-5 flex-wrap">
-                        {cereal.tastingNotes.slice(0, 2).map((note, i) => (
-                            <span key={`note-${cereal.id}-${i}`} className="text-[9px] bg-gold/10 border border-gold/20 px-2 py-1 rounded-md text-cream/80 font-mono">
-                                {note}
-                            </span>
-                        ))}
+                        <span className="text-[9px] bg-gold/10 border border-gold/20 px-2 py-1 rounded-md text-cream/80 font-mono">
+                            Decay {cereal.specs.decayRate}s
+                        </span>
+                        <span className="text-[9px] bg-gold/10 border border-gold/20 px-2 py-1 rounded-md text-cream/80 font-mono">
+                            Sugar {cereal.specs.sugarContent}g
+                        </span>
+                        <span className="text-[9px] bg-gold/10 border border-gold/20 px-2 py-1 rounded-md text-cream/80 font-mono">
+                            Nostalgia {cereal.flavor.nostalgia}
+                        </span>
                     </div>
 
                     <div className="flex justify-between items-center border-t border-gold/10 pt-4 mt-auto">
                         <div className="text-left">
-                            <p className="text-[9px] text-gold/40 uppercase tracking-widest font-mono mb-0.5">Price</p>
+                            <p className="text-[9px] text-gold/40 uppercase tracking-widest font-mono mb-0.5">Ask</p>
                             <p className="font-mono text-base text-slime font-bold">${cereal.price.toFixed(2)}</p>
                         </div>
                         <motion.button
@@ -165,7 +173,7 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                                         transition={{ duration: 0.3 }}
                                         className="flex items-center justify-center gap-2 relative z-10 w-full"
                                     >
-                                        <span>Add to Cart</span>
+                                        <span>Add to Flight</span>
                                     </motion.span>
                                 )}
                             </AnimatePresence>

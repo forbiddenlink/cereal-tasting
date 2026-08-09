@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Cereal } from '../data/mockData';
 import type { Milk } from '../data/milks';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import cerealFallback from '../assets/cereal-fallback.svg';
 
 interface PairingCardProps {
@@ -10,6 +10,7 @@ interface PairingCardProps {
 }
 
 export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
+    const shouldReduceMotion = useReducedMotion();
     // Calculate synergy score (simple logic for now)
     const calculateSynergy = () => {
         if (!milk) return 0;
@@ -111,6 +112,8 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
                                     >
                                         <div className="absolute top-0 left-0 right-0 h-4 bg-white/20 blur-sm" />
                                         {/* Bubbles */}
+                                        {!shouldReduceMotion && (
+                                          <>
                                         <motion.div
                                             animate={{ y: [-10, -30], opacity: [0, 1, 0] }}
                                             transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: 0.5 }}
@@ -121,6 +124,8 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
                                             transition={{ duration: 3, repeat: Infinity, ease: "easeOut", delay: 1 }}
                                             className="absolute bottom-8 right-6 w-1.5 h-1.5 bg-white/50 rounded-full"
                                         />
+                                          </>
+                                        )}
                                     </motion.div>
                                 )}
                             </AnimatePresence>

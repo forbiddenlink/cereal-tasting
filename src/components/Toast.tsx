@@ -17,14 +17,43 @@ const BORDER_COLORS: Record<ToastType['type'], string> = {
 };
 
 export const CEREAL_TOASTS = {
-    addedToCart: (name: string) => `${name} has been cereal-ously acquired`,
-    removedFromCart: (name: string) => `${name} returned to the cellar. It'll remember this.`,
-    pairingFound: () => 'A match made in breakfast heaven',
-    compareMode: () => 'Preparing the tasting flight...',
-    filterApplied: () => "Sommelier's selection refined",
+    addedToCart: (name: string) =>
+        [
+            `${name} has entered the flight. Jacques nodded once. That is high praise.`,
+            `${name} acquired. The cellar lights dimmed out of respect.`,
+            `${name} joined your tasting. Do not apologize for the price.`,
+            `${name} secured. Your childhood just filed a thank-you note.`,
+        ][Math.floor(Math.random() * 4)],
+    removedFromCart: (name: string) =>
+        `${name} returned to the cellar. It will remember this slight.`,
+    checkoutCleared: (count: number) =>
+        count <= 1
+            ? 'Flight cleared. The spoon rests. For now.'
+            : `Flight of ${count} ceremonially dismissed. No calories were harmed (this is a portfolio).`,
+    pairingFound: () => 'A match made in breakfast heaven — or at least a well-lit kitchen.',
+    pairingCopied: (cereal: string, milk?: string) =>
+        milk
+            ? `Pairing filed: ${cereal} × ${milk}. The viscosity committee approves.`
+            : `Pairing link copied for ${cereal}. Milk still undecided — chaotic energy.`,
+    compareMode: () => 'Preparing the tasting flight. Do not blink.',
+    filterApplied: () => "Sommelier's selection refined. The unworthy were politely escorted out.",
     easterEgg: (msg: string) => msg,
-    copied: () => 'Copied to clipboard — spread the gospel of grain',
+    copied: () => 'Copied — spread the gospel of grain',
     quizComplete: (cereal: string) => `The spoon has spoken: you are ${cereal}`,
+    quizShared: (cereal: string) =>
+        `Soul diagnosis (${cereal}) copied. Warn your group chat.`,
+    certShared: (certNumber: string) =>
+        `Certificate ${certNumber} gossip-ready. Please address you accordingly.`,
+    menuPrinted: () => 'Menu dispatched to the printer. Frame it. Say nothing.',
+    certPrinted: () => 'Certificate sent to the printer. Hang it. Wait for questions.',
+    certDownloaded: () => 'PNG acquired. Frame it. Pretend it is real.',
+    emptyFilter: () => 'No vintages survived that filter. Jacques is judging your standards.',
+    milestone: (count: number) =>
+        count === 3
+            ? 'Classic flight achieved. Three bowls. One personality.'
+            : count === 5
+              ? 'Five cereals. Your therapist has been notified (jokingly).'
+              : `Flight size: ${count}. Bold.`,
 };
 
 function ToastItem({ toast, onClose }: { toast: ToastType; onClose: () => void }) {

@@ -43,12 +43,13 @@ export const About: React.FC = () => {
                                 <h2 className="text-3xl font-heading text-gold">Our Heritage</h2>
                             </div>
                             <p className="text-cream/80 leading-relaxed mb-4 text-lg">
-                                Founded in the sacred Saturday morning hours of 1994, <strong className="text-gold">The Cereal Cellar</strong> emerged 
-                                from a simple question: "What if we treated cereal like wine?"
+                                Conceptually founded in the sacred Saturday morning hours of 1994, <strong className="text-gold">The Sommelier&apos;s Spoon</strong> (shop floor: The Cellar) emerged 
+                                from a simple question: &quot;What if we treated cereal like wine?&quot;
                             </p>
                             <p className="text-cream/70 leading-relaxed text-base">
-                                The answer? Absolutely nothing changes except you can now charge $450 for a box of 
-                                Cap'n Crunch and people will nod thoughtfully while eating it.
+                                Officially incorporated in 2024 after Jacques was escorted from a Whole Foods cheese cave. 
+                                The answer to the founding question? Nothing changes except you can charge $450 for Cap&apos;n Crunch 
+                                and people will nod thoughtfully while eating it.
                             </p>
                         </div>
                     </motion.div>
@@ -213,20 +214,20 @@ export const About: React.FC = () => {
                     <div className="relative z-10">
                         <div className="text-center mb-10">
                             <div className="w-16 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-6"></div>
-                            <h2 className="text-4xl font-heading text-gold mb-4">Built With</h2>
+                            <h2 className="text-4xl font-heading text-gold mb-4">Laboratory Equipment</h2>
                             <p className="text-cream/60 font-mono text-sm tracking-wider uppercase">
-                                A portfolio project demonstrating modern web technologies
+                                Do not touch. Jacques gets territorial.
                             </p>
                         </div>
                         
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
                             {[
-                                { name: 'React 19', abbr: 'R' },
-                                { name: 'TypeScript', abbr: 'TS' },
-                                { name: 'Framer Motion', abbr: 'FM' },
-                                { name: 'Vite', abbr: 'V' },
-                                { name: 'Tailwind CSS', abbr: 'TW' },
-                                { name: 'Custom Animations', abbr: 'CA' },
+                                { name: 'Grain Reactors', abbr: 'R', real: 'React 19' },
+                                { name: 'Type Distillery', abbr: 'TS', real: 'TypeScript' },
+                                { name: 'Motion Still', abbr: 'FM', real: 'Framer Motion' },
+                                { name: 'Build Kiln', abbr: 'V', real: 'Vite' },
+                                { name: 'Tailwind Vats', abbr: 'TW', real: 'Tailwind CSS' },
+                                { name: 'Sog Chronometers', abbr: 'CA', real: 'Custom Animations' },
                             ].map((tech, index) => (
                                 <motion.div
                                     key={tech.name}
@@ -236,11 +237,13 @@ export const About: React.FC = () => {
                                     transition={{ delay: index * 0.1 }}
                                     whileHover={{ y: -4, scale: 1.05 }}
                                     className="bg-gradient-to-br from-merlot-dark/80 to-merlot/40 backdrop-blur-sm border-2 border-gold/20 rounded-xl p-8 text-center hover:border-gold/40 transition-all duration-300 group"
+                                    title={tech.real}
                                 >
                                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dim flex items-center justify-center mx-auto mb-3 text-void font-heading font-bold text-lg group-hover:scale-110 transition-transform duration-300">
                                         {tech.abbr}
                                     </div>
                                     <div className="text-cream/90 font-mono font-semibold text-sm">{tech.name}</div>
+                                    <div className="text-cream/35 font-mono text-[10px] mt-1">{tech.real}</div>
                                 </motion.div>
                             ))}
                         </div>
@@ -256,7 +259,7 @@ export const About: React.FC = () => {
                     className="text-center space-y-6 py-8 border-t border-gold/10"
                 >
                     <p className="text-cream/40 text-sm font-mono max-w-3xl mx-auto leading-relaxed">
-                        <strong className="text-gold/60">Legal Disclaimer:</strong> The Cereal Cellar is a satirical portfolio project. 
+                        <strong className="text-gold/60">Legal Disclaimer:</strong> The Sommelier&apos;s Spoon is a satirical portfolio project. 
                         No actual cereal sommeliers were consulted (or exist). All prices are fictional and absurd. 
                         Please don't actually pay $1,500 for Lucky Charms. All trademark cereals mentioned are property 
                         of their respective copyright holders and are used here purely for comedic and educational purposes.

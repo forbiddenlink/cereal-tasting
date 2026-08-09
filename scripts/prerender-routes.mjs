@@ -7,12 +7,14 @@ const __dirname = path.dirname(__filename);
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 const TEMPLATE_PATH = path.join(DIST_DIR, 'index.html');
-const SITE_URL = 'https://forbiddenlink.github.io/cereal-tasting';
-const BUILD_DATE = '2026-02-10';
+const SITE_URL = 'https://cereal-tasting.vercel.app';
+const BUILD_DATE = '2026-07-28';
 
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/pairings/', label: 'Pairings' },
+  { href: '/quiz/', label: 'Soul Quiz' },
+  { href: '/certificate/', label: 'Certify' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
   { href: '/privacy-policy/', label: 'Privacy Policy' },
