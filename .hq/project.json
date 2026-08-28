@@ -1,0 +1,32 @@
+{
+  "allowedForCodex": true,
+  "automationLevel": "manual",
+  "confidentialContext": "none",
+  "context": "personal",
+  "hosting": [],
+  "kind": "app",
+  "lastReviewedAt": "2026-08-27",
+  "lifecycle": "prototype",
+  "notes": "React product prototype with PostHog signal. Useful as a lightweight analytics and UX instrumentation testbed.",
+  "observability": [
+    "posthog"
+  ],
+  "ownerContext": "personal",
+  "source": "owned",
+  "surface": "product",
+  "systems": [
+    "solo-control-tower",
+    "product-analytics"
+  ],
+  "tags": [
+    "biome",
+    "eslint",
+    "posthog",
+    "react",
+    "tailwind",
+    "vitest"
+  ],
+  "urls": {
+    "repository": "https://github.com/forbiddenlink/cereal-tasting"
+  }
+}
