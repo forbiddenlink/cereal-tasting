@@ -15,7 +15,7 @@
     "biome:format": "biome format . --write"
   },
   "dependencies": {
-    "framer-motion": "^12.43.0",
+    "framer-motion": "^13.0.0",
     "posthog-js": "^1.422.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
