@@ -33,7 +33,7 @@ ESLint, and the three `biome:` scripts above run Biome separately.
 - `/pairings/` - milk x cereal synergy calculator (shareable URL)
 - `/quiz/` - soul quiz with `?result=` deep links
 - `/certificate/` - fake certification, PNG download / print
-- `/about/`, `/contact/`
+- `/about/`, `/contact/`, `/privacy-policy`
 
 ## Layout
 
