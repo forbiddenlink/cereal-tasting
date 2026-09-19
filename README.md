@@ -1,7 +1,7 @@
 # The Sommelier's Spoon
 
 > *"Nostalgia. Distilled."*  
-> Satirical luxury cereal tasting — breakfast treated like fine wine.
+> Satirical luxury cereal tasting: breakfast treated like fine wine.
 
 **Live demo:** [cereal-tasting.vercel.app](https://cereal-tasting.vercel.app)  
 **Repo:** [github.com/forbiddenlink/cereal-tasting](https://github.com/forbiddenlink/cereal-tasting)
@@ -16,7 +16,7 @@ A React portfolio piece with a noir-nostalgia cellar of **15 vintage cereals**, 
 
 | Route | Experience |
 |---|---|
-| `/` | The Cellar — filter, sort, duel, cereal of the day |
+| `/` | The Cellar: filter, sort, duel, cereal of the day |
 | `/pairings/` | Milk × cereal synergy calculator (shareable URL) |
 | `/quiz/` | Soul quiz with `?result=` deep links |
 | `/certificate/` | Fake certification + **PNG download** / print |
@@ -53,7 +53,7 @@ pnpm build        # tsc + vite + prerender
 pnpm preview
 ```
 
-Node **22** recommended (see CI). Copy `.env.example` if you want analytics.
+Node **22** recommended (see CI). For analytics, set `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST`; PostHog is skipped entirely if the key is unset.
 
 ---
 
@@ -87,4 +87,4 @@ Typography: **Playfair Display** (display) · **JetBrains Mono** (specs)
 
 ## License
 
-MIT — satirical portfolio project. No real cereal was auctioned.
+MIT. Satirical portfolio project. No real cereal was auctioned.
