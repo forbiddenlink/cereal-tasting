@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/pairing",
+      "destination": "/pairings/",
+      "permanent": true
     }
   ],
   "headers": [
