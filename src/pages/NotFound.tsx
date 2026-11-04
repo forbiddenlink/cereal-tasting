@@ -109,7 +109,7 @@ export const NotFound: React.FC = () => {
                     transition={{ duration: 0.7 }}
                     className="text-center mb-10"
                 >
-                    <p className="text-gold/50 font-mono tracking-[0.3em] uppercase text-xs mb-3">Error 404</p>
+                    <p className="text-gold/65 font-mono tracking-[0.3em] uppercase text-xs mb-3">Error 404</p>
                     <h1 className="text-4xl md:text-6xl font-heading text-gold mb-4">
                         This Page Was Recalled in 1997
                     </h1>
@@ -166,7 +166,7 @@ export const NotFound: React.FC = () => {
                                             key="hidden"
                                             exit={{ rotateY: 90, opacity: 0 }}
                                             transition={{ duration: 0.2 }}
-                                            className="text-gold/30 text-3xl font-heading"
+                                            className="text-gold/65 text-3xl font-heading"
                                         >
                                             ?
                                         </motion.span>
@@ -226,7 +226,7 @@ export const NotFound: React.FC = () => {
                     </motion.div>
                 )}
 
-                <p className="text-cream/25 text-[10px] font-mono mt-10 text-center">
+                <p className="text-cream/65 text-[10px] font-mono mt-10 text-center">
                     No actual pantries were harmed in the making of this 404 page
                 </p>
             </div>

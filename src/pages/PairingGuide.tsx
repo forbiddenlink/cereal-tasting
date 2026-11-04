@@ -152,7 +152,7 @@ export const PairingGuide: React.FC = () => {
                                             <span className={`font-heading text-base block mb-1 transition-colors ${selectedCereal.id === cereal.id ? 'text-gold' : 'text-cream/80 group-hover:text-gold'}`}>
                                                 {cereal.name}
                                             </span>
-                                            <span className="text-xs font-mono text-gold/50">Vintage {cereal.vintage}</span>
+                                            <span className="text-xs font-mono text-gold/65">Vintage {cereal.vintage}</span>
                                         </div>
                                         {selectedCereal.id === cereal.id && (
                                             <div className="absolute right-4 top-1/2 -translate-y-1/2">

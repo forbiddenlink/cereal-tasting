@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
                                 )}
                             </AnimatePresence>
                         </div>
-                        <p className="text-xs font-mono text-gold/50 uppercase tracking-[0.3em] mb-4">
+                        <p className="text-xs font-mono text-gold/65 uppercase tracking-[0.3em] mb-4">
                             Est. Saturday Morning
                         </p>
                         <p className="text-sm text-cream/60 leading-relaxed max-w-xs">
@@ -101,12 +101,12 @@ export const Footer: React.FC = () => {
                     {/* Certifications & Humor */}
                     <div className="text-center md:text-right">
                         <h3 className="text-sm font-heading text-gold/70 uppercase tracking-wider mb-4">Certified By</h3>
-                        <div className="space-y-2 text-xs text-cream/50 font-mono leading-relaxed">
+                        <div className="space-y-2 text-xs text-cream/65 font-mono leading-relaxed">
                             <p>International Cereal Sommelier Association</p>
-                            <p className="text-[10px] text-cream/30">(which doesn't exist)</p>
+                            <p className="text-[10px] text-cream/65">(which doesn't exist)</p>
                             <p className="mt-4">Vintage Breakfast Preservation Society</p>
                             <p className="mt-4">Bureau of Nostalgia Regulation</p>
-                            <p className="text-[10px] text-cream/30">(also fictional)</p>
+                            <p className="text-[10px] text-cream/65">(also fictional)</p>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@ export const Footer: React.FC = () => {
 
                 {/* Bottom Section */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-                    <div className="text-xs text-cream/40 font-mono space-y-1">
+                    <div className="text-xs text-cream/65 font-mono space-y-1">
                         <p>
                             ©{' '}
                             <button
@@ -128,7 +128,7 @@ export const Footer: React.FC = () => {
                             </button>{' '}
                             The Sommelier's Spoon. All rights reserved.
                         </p>
-                        <p className="text-[10px] text-cream/25">
+                        <p className="text-[10px] text-cream/65">
                             A satirical portfolio project. Please don't actually pay $2,100 for cereal.
                         </p>
                     </div>
@@ -167,7 +167,7 @@ export const Footer: React.FC = () => {
                             className="overflow-hidden"
                         >
                             <div className="mt-6 p-5 rounded-xl border border-gold/15 bg-white/[0.02]">
-                                <p className="text-[10px] font-mono text-gold/50 uppercase tracking-widest mb-2">
+                                <p className="text-[10px] font-mono text-gold/65 uppercase tracking-widest mb-2">
                                     The True Origin Story
                                 </p>
                                 <p className="text-xs text-cream/60 leading-relaxed italic">

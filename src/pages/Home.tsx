@@ -250,7 +250,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                         initial={{ y: 20, opacity: 0, filter: 'blur(4px)' }}
                         animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
                         transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        className="text-sm md:text-base text-gold/50 font-mono max-w-2xl mx-auto tracking-wider uppercase text-center"
+                        className="text-sm md:text-base text-gold/65 font-mono max-w-2xl mx-auto tracking-wider uppercase text-center"
                     >
                         We age breakfast like wine and price it like regret
                     </motion.p>
@@ -258,7 +258,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.7, duration: 0.6 }}
-                        className="mt-5 text-xs text-cream/40 font-mono italic max-w-lg mx-auto"
+                        className="mt-5 text-xs text-cream/65 font-mono italic max-w-lg mx-auto"
                     >
                         “{jacquesLine}” — Jacques
                     </motion.p>
@@ -283,7 +283,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                             Today&apos;s Mandated Bowl
                         </p>
                         <h2 className="text-2xl md:text-3xl font-heading text-gold mb-1">{dailyCereal.name}</h2>
-                        <p className="text-xs font-mono text-gold/50 mb-2">
+                        <p className="text-xs font-mono text-gold/65 mb-2">
                             Vintage {dailyCereal.vintage} · {dailyCereal.region}
                         </p>
                         <p className="text-sm text-cream/65 max-w-xl">
@@ -421,7 +421,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                         <div className="rounded-xl border border-gold/15 bg-white/[0.03] p-5 text-center">
                             <p className="text-lg font-heading text-cream mb-2">{compareResult.headline}</p>
                             <p className="text-sm text-cream/70 leading-relaxed max-w-2xl mx-auto">{compareResult.body}</p>
-                            <p className="text-[10px] font-mono text-gold/40 mt-4 uppercase tracking-wider">
+                            <p className="text-[10px] font-mono text-gold/65 mt-4 uppercase tracking-wider">
                                 Price gap: $
                                 {Math.abs(selectedCompareCereals[0].price - selectedCompareCereals[1].price).toFixed(2)}
                                 {' '}· filed with the Bureau of Breakfast Grievances
@@ -432,7 +432,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
             )}
 
             {compareMode && selectedCompareCereals.length < 2 && (
-                <p className="container mx-auto px-4 mb-8 text-center text-xs font-mono text-gold/50 uppercase tracking-wider">
+                <p className="container mx-auto px-4 mb-8 text-center text-xs font-mono text-gold/65 uppercase tracking-wider">
                     Select {2 - selectedCompareCereals.length} more cereal{selectedCompareCereals.length === 1 ? '' : 's'} to force a verdict
                 </p>
             )}
@@ -447,7 +447,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
                 >
                     THE COLLECTION
                 </motion.h2>
-                <p className="text-center text-xs font-mono text-cream/40 uppercase tracking-wider mb-12">
+                <p className="text-center text-xs font-mono text-cream/65 uppercase tracking-wider mb-12">
                     {filteredCereals.length} vintage{filteredCereals.length === 1 ? '' : 's'} currently uncorked
                 </p>
                 {filteredCereals.length === 0 ? (

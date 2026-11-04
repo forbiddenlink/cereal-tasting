@@ -109,7 +109,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, itemCount, total,
               tabIndex={-1}
               className="w-full max-w-md rounded-2xl border border-gold/20 bg-gradient-to-b from-merlot-dark to-void p-6 shadow-2xl outline-none"
             >
-              <p className="text-[10px] font-mono text-gold/50 uppercase tracking-[0.25em] mb-2">
+              <p className="text-[10px] font-mono text-gold/65 uppercase tracking-[0.25em] mb-2">
                 Closing Ceremony
               </p>
               <h2 id="checkout-modal-title" className="text-2xl font-heading text-gold mb-2">
@@ -121,7 +121,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, itemCount, total,
               <div className="rounded-xl border border-gold/15 bg-white/[0.03] p-4 space-y-2 text-sm font-mono mb-6">
                 <p className="text-gold/80">Bowls in flight: {itemCount}</p>
                 <p className="text-cream">Emotional ledger: ${total.toFixed(2)}</p>
-                <p className="text-[10px] text-cream/40 uppercase tracking-wider pt-1">
+                <p className="text-[10px] text-cream/65 uppercase tracking-wider pt-1">
                   Recognized by 0 payment processors
                 </p>
               </div>
@@ -622,9 +622,9 @@ function AppContent() {
                       activeCommandIndex >= 0 ? `command-option-${filteredCommands[activeCommandIndex]?.id}` : undefined
                     }
                     placeholder="Search actions, pages, cereals..."
-                    className="w-full bg-transparent text-cream placeholder:text-cream/40 text-sm md:text-base font-mono outline-none"
+                    className="w-full bg-transparent text-cream placeholder:text-cream/65 text-sm md:text-base font-mono outline-none"
                   />
-                  <div className="mt-2 text-[10px] text-gold/45 font-mono uppercase tracking-widest">
+                  <div className="mt-2 text-[10px] text-gold/65 font-mono uppercase tracking-widest">
                     Press Enter to execute • Esc to close • Cmd/Ctrl + K
                   </div>
                 </div>

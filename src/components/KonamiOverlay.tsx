@@ -114,7 +114,7 @@ export function KonamiOverlay({ isActive, onDismiss }: KonamiOverlayProps) {
                                         </div>
                                         <div className="text-right">
                                             <p className="text-3xl font-heading text-slime">$∞</p>
-                                            <p className="text-[10px] font-mono text-cream/40">per serving</p>
+                                            <p className="text-[10px] font-mono text-cream/65">per serving</p>
                                         </div>
                                     </div>
 
@@ -157,7 +157,7 @@ export function KonamiOverlay({ isActive, onDismiss }: KonamiOverlayProps) {
                                         </div>
                                     </div>
 
-                                    <p className="text-xs text-cream/40 italic text-center">
+                                    <p className="text-xs text-cream/65 italic text-center">
                                         "Some cereals are eaten. This one eats you." — Jacques Flakémont III, trembling
                                     </p>
                                 </div>
@@ -172,7 +172,7 @@ export function KonamiOverlay({ isActive, onDismiss }: KonamiOverlayProps) {
                                     Return to Reality
                                 </motion.button>
 
-                                <p className="text-[10px] text-cream/30 font-mono mt-6">
+                                <p className="text-[10px] text-cream/65 font-mono mt-6">
                                     ↑↑↓↓←→←→BA • You found the secret. Tell no one. (Or tell everyone. We're not your mom.)
                                 </p>
                             </div>

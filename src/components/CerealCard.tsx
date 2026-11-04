@@ -123,7 +123,7 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                             {cereal.vintage}
                         </span>
                     </h3>
-                    <p className="text-[10px] font-mono text-gold/40 uppercase tracking-wider mb-3">{cereal.region}</p>
+                    <p className="text-[10px] font-mono text-gold/65 uppercase tracking-wider mb-3">{cereal.region}</p>
 
                     <p className="text-xs text-cream/70 italic leading-relaxed mb-5 line-clamp-2 px-1">
                         “{cereal.tastingNotes[0]}”
@@ -143,7 +143,7 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
 
                     <div className="flex justify-between items-center border-t border-gold/10 pt-4 mt-auto">
                         <div className="text-left">
-                            <p className="text-[9px] text-gold/40 uppercase tracking-widest font-mono mb-0.5">Ask</p>
+                            <p className="text-[9px] text-gold/65 uppercase tracking-widest font-mono mb-0.5">Ask</p>
                             <p className="font-mono text-base text-slime font-bold">${cereal.price.toFixed(2)}</p>
                         </div>
                         <motion.button
@@ -244,7 +244,7 @@ export const CerealCard: React.FC<CerealCardProps> = ({ cereal, onSelect, onAddT
                                                         {review.author}
                                                         {review.verified && <span className="text-slime/60 ml-1">✓</span>}
                                                     </span>
-                                                    <span className="text-[10px] text-gold/40">
+                                                    <span className="text-[10px] text-gold/65">
                                                         {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
                                                     </span>
                                                 </div>
