@@ -90,7 +90,7 @@ function ToastItem({ toast, onClose }: { toast: ToastType; onClose: () => void }
             <button
                 type="button"
                 onClick={onClose}
-                className="text-cream/40 hover:text-cream/80 transition-colors text-lg leading-none flex-shrink-0 mt-0.5"
+                className="text-cream/65 hover:text-cream/80 transition-colors text-lg leading-none flex-shrink-0 mt-0.5"
                 aria-label="Dismiss notification"
             >
                 ×

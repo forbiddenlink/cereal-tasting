@@ -124,7 +124,7 @@ export function Certificate() {
                         >
                             <div className="glass-panel-heavy rounded-2xl border border-gold/20 p-10 md:p-14">
                                 <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-8" />
-                                <p className="text-gold/50 font-mono tracking-[0.3em] uppercase text-xs mb-4">
+                                <p className="text-gold/65 font-mono tracking-[0.3em] uppercase text-xs mb-4">
                                     The Certification Ceremony
                                 </p>
                                 <h1 className="text-4xl md:text-5xl font-heading text-gold mb-4">
@@ -145,7 +145,7 @@ export function Certificate() {
                                         onChange={(e) => setName(e.target.value)}
                                         onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
                                         placeholder="e.g. Jacques Flakémont III (aspiring)"
-                                        className="w-full bg-white/[0.03] border-2 border-gold/30 rounded-xl px-5 py-4 text-cream text-center font-heading text-xl placeholder:text-cream/20 focus:outline-none focus:border-gold/60 transition-colors"
+                                        className="w-full bg-white/[0.03] border-2 border-gold/30 rounded-xl px-5 py-4 text-cream text-center font-heading text-xl placeholder:text-cream/65 focus:outline-none focus:border-gold/60 transition-colors"
                                         autoFocus
                                     />
                                 </div>
@@ -161,7 +161,7 @@ export function Certificate() {
                                     Emboss My Name
                                 </motion.button>
 
-                                <p className="text-cream/25 text-[10px] font-mono mt-6">
+                                <p className="text-cream/65 text-[10px] font-mono mt-6">
                                     This certificate is recognized by 0 governing bodies worldwide
                                 </p>
                                 <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-8" />
@@ -359,7 +359,7 @@ export function Certificate() {
                                 </motion.button>
                             </div>
 
-                            <p className="text-cream/25 text-[10px] font-mono mt-6 text-center print:hidden">
+                            <p className="text-cream/65 text-[10px] font-mono mt-6 text-center print:hidden">
                                 Pro tip: Print this and hang it in your office. Say nothing. Wait.
                             </p>
                         </motion.div>

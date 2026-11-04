@@ -18,7 +18,7 @@ export const PrivacyPolicy: React.FC = () => {
                     <p className="text-gold/60 font-mono uppercase tracking-wider text-sm mb-2">
                         Your Nostalgia, Our Commitment
                     </p>
-                    <p className="text-cream/50 text-xs font-mono">
+                    <p className="text-cream/65 text-xs font-mono">
                         Last Updated: When we remembered to write this
                     </p>
 

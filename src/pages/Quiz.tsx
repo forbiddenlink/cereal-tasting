@@ -275,7 +275,7 @@ export function Quiz() {
                         >
                             <div className="glass-panel-heavy rounded-2xl border border-gold/20 p-10 md:p-14">
                                 <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-8" />
-                                <p className="text-gold/50 font-mono tracking-[0.3em] uppercase text-xs mb-4">
+                                <p className="text-gold/65 font-mono tracking-[0.3em] uppercase text-xs mb-4">
                                     The Sommelier's Assessment
                                 </p>
                                 <h1 className="text-4xl md:text-6xl font-heading text-gold mb-6">
@@ -284,7 +284,7 @@ export function Quiz() {
                                 <p className="text-cream/60 text-sm mb-2 max-w-md mx-auto">
                                     7 questions stand between you and self-knowledge.
                                 </p>
-                                <p className="text-cream/40 text-xs font-mono mb-10">
+                                <p className="text-cream/65 text-xs font-mono mb-10">
                                     Estimated time: 2 minutes. Emotional recovery time: varies.
                                 </p>
 
@@ -299,7 +299,7 @@ export function Quiz() {
                                 </motion.button>
 
                                 <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-10" />
-                                <p className="text-cream/30 text-[10px] font-mono mt-4">
+                                <p className="text-cream/65 text-[10px] font-mono mt-4">
                                     Results are scientifically meaningless but emotionally devastating
                                 </p>
                             </div>
@@ -316,7 +316,7 @@ export function Quiz() {
                         >
                             {/* Progress bar */}
                             <div className="mb-8">
-                                <div className="flex justify-between text-[10px] font-mono text-gold/50 uppercase tracking-wider mb-2">
+                                <div className="flex justify-between text-[10px] font-mono text-gold/65 uppercase tracking-wider mb-2">
                                     <span>Milk Fill Level</span>
                                     <span>{currentQuestion + 1} / {QUESTIONS.length}</span>
                                 </div>
@@ -330,7 +330,7 @@ export function Quiz() {
                             </div>
 
                             <div className="glass-panel-heavy rounded-2xl border border-gold/20 p-8 md:p-10">
-                                <p className="text-[10px] font-mono text-gold/40 uppercase tracking-widest mb-4">
+                                <p className="text-[10px] font-mono text-gold/65 uppercase tracking-widest mb-4">
                                     Question {currentQuestion + 1}
                                 </p>
                                 <h2 className="text-2xl md:text-3xl font-heading text-gold mb-8 leading-tight">
@@ -354,7 +354,7 @@ export function Quiz() {
                                             whileTap={{ scale: 0.98 }}
                                             className="w-full text-left px-5 py-4 rounded-xl border border-gold/15 bg-white/[0.02] text-cream/80 text-sm md:text-base font-mono transition-colors hover:text-cream"
                                         >
-                                            <span className="text-gold/50 mr-3">{String.fromCharCode(65 + idx)}.</span>
+                                            <span className="text-gold/65 mr-3">{String.fromCharCode(65 + idx)}.</span>
                                             {answer.text}
                                         </motion.button>
                                     ))}
@@ -400,7 +400,7 @@ export function Quiz() {
                             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                         >
                             <div className="glass-panel-heavy rounded-2xl border-2 border-gold/30 p-8 md:p-12 text-center">
-                                <p className="text-[10px] font-mono text-gold/50 uppercase tracking-[0.3em] mb-2">
+                                <p className="text-[10px] font-mono text-gold/65 uppercase tracking-[0.3em] mb-2">
                                     The Spoon Has Spoken
                                 </p>
                                 <h2 className="text-3xl md:text-4xl font-heading text-gold mb-2">
@@ -424,7 +424,7 @@ export function Quiz() {
                                 >
                                     {resultCereal.name}
                                 </h3>
-                                <p className="text-sm font-mono text-gold/50 mb-1">
+                                <p className="text-sm font-mono text-gold/65 mb-1">
                                     Vintage {resultCereal.vintage} • {resultCereal.region}
                                 </p>
                                 <p className="text-lg font-heading text-slime mb-8">
@@ -448,7 +448,7 @@ export function Quiz() {
                                     {Object.entries(traits).map(([key, value]) => (
                                         <div key={key}>
                                             <div className="flex justify-between text-xs mb-1">
-                                                <span className="text-cream/50 capitalize font-mono">{key}</span>
+                                                <span className="text-cream/65 capitalize font-mono">{key}</span>
                                                 <span className="text-cream/80 font-mono">{value}</span>
                                             </div>
                                             <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
@@ -467,13 +467,13 @@ export function Quiz() {
                                 {/* Sommelier's note */}
                                 {answers.length > 0 && (
                                 <div className="bg-white/[0.03] border border-gold/10 rounded-xl p-5 mb-8 text-left">
-                                    <p className="text-[10px] font-mono text-gold/50 uppercase tracking-widest mb-2">
+                                    <p className="text-[10px] font-mono text-gold/65 uppercase tracking-widest mb-2">
                                         Sommelier's Note
                                     </p>
                                     <p className="text-sm text-cream/70 italic leading-relaxed">
                                         "{note.sommelierNote}"
                                     </p>
-                                    <p className="text-xs text-gold/40 font-mono mt-3 text-right">
+                                    <p className="text-xs text-gold/65 font-mono mt-3 text-right">
                                         — Jacques Flakémont III
                                     </p>
                                 </div>
@@ -500,7 +500,7 @@ export function Quiz() {
                                     </motion.button>
                                 </div>
 
-                                <p className="text-[10px] text-cream/25 font-mono mt-8">
+                                <p className="text-[10px] text-cream/65 font-mono mt-8">
                                     This assessment is recognized by 0 academic institutions and 1 cereal-obsessed Frenchman
                                 </p>
                             </div>

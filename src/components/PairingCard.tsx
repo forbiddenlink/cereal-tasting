@@ -84,7 +84,7 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
 
                     <motion.span
                         animate={{ rotate: milk ? 0 : 90, scale: milk ? 1 : 0.5 }}
-                        className="text-4xl text-gold/30 font-thin"
+                        className="text-4xl text-gold/65 font-thin"
                     >
                         +
                     </motion.span>
@@ -131,7 +131,7 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
                             </AnimatePresence>
 
                             {!milk && (
-                                <div className="absolute inset-0 flex items-center justify-center text-xs text-white/20 font-mono text-center">
+                                <div className="absolute inset-0 flex items-center justify-center text-xs text-white/60 font-mono text-center">
                                     Select<br />Solvent
                                 </div>
                             )}
@@ -165,7 +165,7 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
                                 />
                                 <div className="text-xs uppercase tracking-[0.3em] text-gold/70 mb-2">Calculated Synergy</div>
                                 <div className={`text-7xl font-heading ${synergy > 80 ? 'text-slime' : synergy < 40 ? 'text-berry' : 'text-cream'} drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]`}>
-                                    {synergy}<span className="text-3xl text-gold/50">/100</span>
+                                    {synergy}<span className="text-3xl text-gold/65">/100</span>
                                 </div>
                             </div>
 

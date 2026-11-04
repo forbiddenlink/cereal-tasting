@@ -44,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ cartItemCount, onOpenCart }) => 
                         <h1 className="text-base md:text-lg lg:text-xl font-heading text-gold tracking-wider group-hover:text-cream transition-colors duration-300">
                             THE SOMMELIER'S SPOON
                         </h1>
-                        <p className="text-[9px] md:text-[10px] font-mono text-gold/40 tracking-[0.25em] uppercase">
+                        <p className="text-[9px] md:text-[10px] font-mono text-gold/65 tracking-[0.25em] uppercase">
                             Est. Saturday Morning
                         </p>
                     </div>

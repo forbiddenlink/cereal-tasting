@@ -81,7 +81,7 @@ export const CerealRating: React.FC<CerealRatingProps> = ({ cerealId, initialRat
                                 transition={springs.snappy}
                             >
                                 <svg
-                                    className={`w-8 h-8 transition-colors ${filled ? 'text-gold drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]' : 'text-white/20'
+                                    className={`w-8 h-8 transition-colors ${filled ? 'text-gold drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]' : 'text-white/60'
                                         }`}
                                     fill="currentColor"
                                     viewBox="0 0 20 20"

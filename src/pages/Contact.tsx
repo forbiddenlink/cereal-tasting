@@ -47,7 +47,7 @@ export const Contact: React.FC = () => {
                             >
                                 Open the GitHub Issue Desk
                             </a>
-                            <p className="text-cream/40 text-xs font-mono mt-4">
+                            <p className="text-cream/65 text-xs font-mono mt-4">
                                 Response window: whenever Jacques finishes judging your milk choice
                             </p>
                         </div>
@@ -73,7 +73,7 @@ export const Contact: React.FC = () => {
                             >
                                 Start a Discussion
                             </a>
-                            <p className="text-cream/40 text-xs font-mono mt-4">
+                            <p className="text-cream/65 text-xs font-mono mt-4">
                                 Media kit: this entire website, plus your imagination
                             </p>
                         </div>
@@ -114,7 +114,7 @@ export const Contact: React.FC = () => {
                     </div>
                 </motion.div>
 
-                <p className="text-center text-cream/35 text-sm font-mono">
+                <p className="text-center text-cream/65 text-sm font-mono">
                     No .example emails were harmed. Real inbox routing lives on GitHub.
                 </p>
             </div>

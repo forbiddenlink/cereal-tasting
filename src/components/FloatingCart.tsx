@@ -186,7 +186,7 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
                                 <div className="flex items-center justify-between border-b border-gold/20 pb-4">
                                     <div>
                                         <h2 id="cart-panel-title" className="text-2xl font-heading text-gold">Your Flight</h2>
-                                        <p className="text-[10px] font-mono text-gold/50 uppercase tracking-wider mt-1">
+                                        <p className="text-[10px] font-mono text-gold/65 uppercase tracking-wider mt-1">
                                             {isEmpty ? 'An Empty Promise' : namedFlight}
                                         </p>
                                     </div>
@@ -229,7 +229,7 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
                                                         style={{ width: `${sogPct}%` }}
                                                     />
                                                 </div>
-                                                <p className="text-xs text-cream/55 font-mono">
+                                                <p className="text-xs text-cream/65 font-mono">
                                                     {sogStatus(sogLeft, leadCereal.specs.decayRate)}
                                                 </p>
                                             </div>
@@ -290,7 +290,7 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
                                                 <span className="font-heading text-gold">Emotional Ledger</span>
                                                 <span className="font-mono text-cream font-bold">${total.toFixed(2)}</span>
                                             </div>
-                                            <p className="text-xs text-cream/40 font-mono">
+                                            <p className="text-xs text-cream/65 font-mono">
                                                 *Includes childhood memories, excludes dental work
                                             </p>
                                         </div>
@@ -315,7 +315,7 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
                                             Print Tasting Menu
                                         </button>
 
-                                        <p className="text-center text-xs text-cream/30 font-mono">
+                                        <p className="text-center text-xs text-cream/65 font-mono">
                                             Portfolio ritual only — no card required, no cereal shipped
                                         </p>
                                     </>

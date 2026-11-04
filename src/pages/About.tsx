@@ -166,7 +166,7 @@ export const About: React.FC = () => {
                                     <p className="text-cream/80 italic text-lg mb-3">"{item.quote}"</p>
                                     <div className="flex items-center justify-between">
                                         <p className="text-gold text-sm font-heading">— {item.source}</p>
-                                        <p className="text-cream/40 text-xs font-mono">{item.attribution}</p>
+                                        <p className="text-cream/65 text-xs font-mono">{item.attribution}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -195,7 +195,7 @@ export const About: React.FC = () => {
                                     </motion.div>
                                 ))}
                             </div>
-                            <p className="text-center text-cream/30 text-xs font-mono mt-6 italic">
+                            <p className="text-center text-cream/65 text-xs font-mono mt-6 italic">
                                 (All awards are fictional and self-awarded)
                             </p>
                         </div>
@@ -243,7 +243,7 @@ export const About: React.FC = () => {
                                         {tech.abbr}
                                     </div>
                                     <div className="text-cream/90 font-mono font-semibold text-sm">{tech.name}</div>
-                                    <div className="text-cream/35 font-mono text-[10px] mt-1">{tech.real}</div>
+                                    <div className="text-cream/65 font-mono text-[10px] mt-1">{tech.real}</div>
                                 </motion.div>
                             ))}
                         </div>
@@ -258,7 +258,7 @@ export const About: React.FC = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center space-y-6 py-8 border-t border-gold/10"
                 >
-                    <p className="text-cream/40 text-sm font-mono max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-cream/65 text-sm font-mono max-w-3xl mx-auto leading-relaxed">
                         <strong className="text-gold/60">Legal Disclaimer:</strong> The Sommelier&apos;s Spoon is a satirical portfolio project. 
                         No actual cereal sommeliers were consulted (or exist). All prices are fictional and absurd. 
                         Please don't actually pay $1,500 for Lucky Charms. All trademark cereals mentioned are property 
