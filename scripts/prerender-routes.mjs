@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { resolveBuildDate, stampSitemapLastmod } from './build-date.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -8,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 const TEMPLATE_PATH = path.join(DIST_DIR, 'index.html');
 const SITE_URL = 'https://cereal-tasting.vercel.app';
-const BUILD_DATE = '2026-07-28';
+const BUILD_DATE = resolveBuildDate();
 
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
@@ -255,6 +256,15 @@ async function run() {
   const notFoundHtml = applyRouteMetadata(template, NOT_FOUND_ROUTE);
   await writeFile(path.join(DIST_DIR, '404.html'), notFoundHtml, 'utf8');
   await writeRouteHtml(template, NOT_FOUND_ROUTE);
+
+  // public/sitemap.xml is copied into dist as-is; keep its lastmod in step with this build.
+  const sitemapPath = path.join(DIST_DIR, 'sitemap.xml');
+  try {
+    const sitemap = await readFile(sitemapPath, 'utf8');
+    await writeFile(sitemapPath, stampSitemapLastmod(sitemap, BUILD_DATE), 'utf8');
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
 
   console.log(`Prerendered ${ROUTES.length + 2} static HTML routes into ${DIST_DIR}`);
 }
