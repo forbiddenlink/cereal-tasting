@@ -34,10 +34,16 @@ function formatDate(): string {
         'Eighteen', 'Nineteen'];
     const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
     const year = now.getFullYear();
-    const century = Math.floor(year / 100);
+    const thousands = Math.floor(year / 1000);
+    const hundreds = Math.floor((year % 1000) / 100);
     const remainder = year % 100;
-    const centuryWord = remainder < 20 ? ones[remainder] : `${tens[Math.floor(remainder / 10)]}${remainder % 10 ? '-' + ones[remainder % 10] : ''}`;
-    const yearWord = `${ones[century] || century} Thousand ${centuryWord ? `and ${centuryWord}` : ''}`.trim();
+    const remainderWord = remainder < 20 ? ones[remainder] : `${tens[Math.floor(remainder / 10)]}${remainder % 10 ? '-' + ones[remainder % 10] : ''}`;
+    const yearWord = [
+        thousands ? `${ones[thousands] || thousands} Thousand` : '',
+        hundreds ? `${ones[hundreds]} Hundred` : '',
+        remainderWord ? `${thousands || hundreds ? 'and ' : ''}${remainderWord}` : '',
+    ].filter(Boolean).join(' ');
+
 
     return `${months[now.getMonth()]} the ${ordinal(now.getDate())}, ${yearWord}`;
 }
