@@ -2,6 +2,7 @@ import React from 'react';
 import type { Cereal } from '../data/mockData';
 import type { Milk } from '../data/milks';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { calculateSynergy, synergyLabel } from '../utils/pairing';
 import cerealFallback from '../assets/cereal-fallback.svg';
 
 interface PairingCardProps {
@@ -11,36 +12,7 @@ interface PairingCardProps {
 
 export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
     const shouldReduceMotion = useReducedMotion();
-    // Calculate synergy score (simple logic for now)
-    const calculateSynergy = () => {
-        if (!milk) return 0;
-
-        let score = 85; // Base high score
-
-        // Bonus if it's the recommended pairing
-        if (milk.bestPairedWith.includes(cereal.id)) {
-            score += 10;
-        } else if (cereal.recommendedMilkPairing === milk.id) {
-            score += 10;
-        }
-
-        // Penalty logic (just for flavor)
-        if (cereal.name.includes("Chocolate") && milk.name.includes("Strawberry")) {
-            score = 12; // Disgusting
-        }
-
-        return Math.min(100, score);
-    };
-
-    const synergy = calculateSynergy();
-
-    const getSynergyLabel = (score: number) => {
-        if (score === 0) return "Awaiting Solvent...";
-        if (score < 40) return "Potentially Hazardous";
-        if (score < 70) return "Palatable";
-        if (score < 90) return "Harmonious";
-        return "Transcendental";
-    };
+    const synergy = calculateSynergy(cereal, milk);
 
     const getScoreColor = (score: number) => {
         if (score > 80) return 'border-slime/50 text-slime bg-slime/5';
@@ -174,7 +146,7 @@ export const PairingCard: React.FC<PairingCardProps> = ({ cereal, milk }) => {
                                     inline-block px-4 py-1.5 text-xs font-mono uppercase tracking-widest rounded-full border
                                     ${getScoreColor(synergy)}
                                 `}>
-                                    {getSynergyLabel(synergy)}
+                                    {synergyLabel(synergy)}
                                 </div>
                             </div>
                         </motion.div>
