@@ -22,6 +22,8 @@ A React portfolio piece with a noir-nostalgia cellar of **15 vintage cereals**, 
 | `/certificate/` | Fake certification + **PNG download** / print |
 | `/about/` | House lore + lab equipment |
 | `/contact/` | Real GitHub CTAs (no fake `.example` inboxes) |
+| `/privacy-policy/` | Privacy policy |
+| any other path | 404 page with a pantry mini-game |
 
 ### Highlights
 
@@ -49,11 +51,13 @@ pnpm install
 pnpm dev          # http://localhost:5173
 pnpm test         # vitest
 pnpm lint         # eslint
+pnpm biome:check  # biome (also biome:fix, biome:format)
+pnpm test:watch   # vitest in watch mode
 pnpm build        # tsc + vite + prerender
 pnpm preview
 ```
 
-Node **22** recommended (see CI). For analytics, set `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST`; PostHog is skipped entirely if the key is unset.
+Use Node 22 (the version CI runs). The repo has no `engines` field or `.nvmrc`. For analytics, set `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST`; PostHog is skipped entirely if the key is unset.
 
 ---
 
@@ -64,8 +68,9 @@ src/
   components/   # cards, cart, flight menu, toasts, milk pour…
   pages/        # Home, Pairings, Quiz, Certificate, About, Contact…
   data/         # cereals, milks, Jacques copy
-  utils/        # soul match, certificate PNG, motion helpers
+  utils/        # pairing, soul match, certificate PNG, motion helpers
   hooks/        # focus trap, Konami, crumb trail
+  styles/       # CSS variables and global layers
 public/cereals/ # 15 box art assets
 scripts/prerender-routes.mjs
 ```
@@ -87,4 +92,4 @@ Typography: **Playfair Display** (display) · **JetBrains Mono** (specs)
 
 ## License
 
-MIT. Satirical portfolio project. No real cereal was auctioned.
+MIT. See [LICENSE](LICENSE). Satirical portfolio project. No real cereal was auctioned.
